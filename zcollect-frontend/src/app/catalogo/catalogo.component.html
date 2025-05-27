@@ -28,17 +28,17 @@
     <h2 class="categoria-nombre">{{ item.categoria.nombre }}</h2>
 
     <div class="productos-grid">
-      <div *ngFor="let producto of item.productos" class="producto-card">
-        <a [routerLink]="['/producto', producto.id_producto]" class="producto-card">
-          <div class="producto-img-wrapper">
-            <img [src]="producto.img_url" alt="{{ producto.nombre }}" class="producto-img" />
-          </div>
-          <div class="producto-info">
-            <h3 class="producto-nombre">{{ producto.nombre }}</h3>
-            <p class="producto-precio">{{ producto.precio | currency:'EUR' }}</p>
-          </div>
-        </a>
-      </div>
+      <a *ngFor="let producto of item.productos"
+         [routerLink]="['/producto', producto.id_producto]"
+         class="producto-card">
+        <div class="producto-img-wrapper">
+          <img [src]="producto.img_url" alt="{{ producto.nombre }}" class="producto-img" />
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+          <p class="producto-precio">{{ producto.precio | currency:'EUR' }}</p>
+        </div>
+      </a>
 
       <p *ngIf="item.productos.length === 0" class="text-muted">
         No hay productos en esta categoría.

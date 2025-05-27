@@ -32,6 +32,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Producto")
 public class Producto {
+
     @Id
     @Size(min = 1, max = 36)
     private String id_producto;
@@ -63,6 +64,7 @@ public class Producto {
     private List<PedidoProducto> pedidos;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<CarritoProducto> carritos;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
@@ -170,7 +172,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id_producto=" + id_producto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", stock=" + stock + ", img_url=" + img_url + ", categoria=" + categoria + ", pedidos=" + pedidos + ", carritos=" + carritos + ", rese\u00f1as=" + reseñas + '}';
+        return "Producto{id_producto='" + id_producto + "', nombre='" + nombre + "', precio=" + precio + ", stock=" + stock + "}";
     }
 
     @Override
@@ -194,6 +196,5 @@ public class Producto {
         final Producto other = (Producto) obj;
         return Objects.equals(this.id_producto, other.id_producto);
     }
-    
-    
+
 }

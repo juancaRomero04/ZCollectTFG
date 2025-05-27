@@ -4,6 +4,7 @@
  */
 package com.zcollect.ZCollect.repositories;
 
+import com.zcollect.ZCollect.entitites.Carrito;
 import com.zcollect.ZCollect.entitites.CarritoProducto;
 import com.zcollect.ZCollect.entitites.CarritoProductoId;
 import java.util.Optional;
@@ -18,5 +19,5 @@ public interface CarritoProductoRepository extends JpaRepository<CarritoProducto
     void deleteById_CarritoIdAndId_ProductoId(String carritoId, String productoId);
     void deleteById_CarritoId(String carritoId);
     Optional<CarritoProducto> findById_CarritoIdAndId_ProductoId(String carritoId, String productoId);
-
+    void deleteAllByCarrito(Carrito carrito);
 }

@@ -8,6 +8,7 @@ import com.zcollect.ZCollect.entitites.Carrito;
 import com.zcollect.ZCollect.entitites.Usuario;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -15,5 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CarritoRepository extends JpaRepository<Carrito, String>{
     Optional<Carrito> findByUsuario(Usuario usuario);
-
+    @Query("SELECT c FROM Carrito c ORDER BY c.id_carrito DESC")
+    Optional<Carrito> findTopByOrderByIdCarritoDesc();
 }

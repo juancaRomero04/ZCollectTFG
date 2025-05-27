@@ -4,6 +4,8 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,6 +29,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Carrito")
 public class Carrito {
+
     @Id
     @Size(min = 1, max = 36)
     private String id_carrito;
@@ -37,16 +40,18 @@ public class Carrito {
 
     @OneToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<CarritoProducto> productos;
 
     public Carrito(String id_carrito, Date fechaC, Usuario usuario) {
         this.id_carrito = id_carrito;
         this.fechaC = fechaC;
         this.usuario = usuario;
-        this.productos=new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
     public Carrito(String id_carrito) {
@@ -90,7 +95,12 @@ public class Carrito {
 
     @Override
     public String toString() {
-        return "Carrito{" + "id_carrito=" + id_carrito + ", fechaC=" + fechaC + ", usuario=" + usuario + ", productos=" + productos + '}';
+        return "Carrito{"
+                + "id_carrito='" + id_carrito + '\''
+                + ", fechaC=" + fechaC
+                + ", usuario=" + (usuario != null ? usuario.getId_user(): "null")
+                + ", productos=" + (productos != null ? productos.size() + " productos" : "null")
+                + '}';
     }
 
     @Override
@@ -114,5 +124,5 @@ public class Carrito {
         final Carrito other = (Carrito) obj;
         return Objects.equals(this.id_carrito, other.id_carrito);
     }
-    
+
 }

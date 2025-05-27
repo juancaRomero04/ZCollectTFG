@@ -64,9 +64,9 @@ public class SpringSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
                 .requestMatchers(HttpMethod.DELETE, "/usuarios/**").authenticated()
-                .requestMatchers("/usuarios/login", "/usuarios/registro", "/", "/productos/**").permitAll()
+                .requestMatchers("/usuarios/login", "/usuarios/registro", "/", "/carrito/**", "/productos/**").permitAll()
                 .requestMatchers("/categorias/**").permitAll()
-                .requestMatchers("/carrito/**", "/pedidos/**", "/reseñas/**").hasAuthority("ROLE_USER")
+                .requestMatchers("/pedidos/**", "/reseñas/**").hasAuthority("ROLE_USER")
                 .requestMatchers("/usuarios/**").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 )

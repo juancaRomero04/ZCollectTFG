@@ -4,6 +4,8 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -26,17 +28,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "Carrito_Producto")
 public class CarritoProducto {
+
     @EmbeddedId
     private CarritoProductoId id;
 
     @ManyToOne
     @MapsId("carritoId")
     @JoinColumn(name = "id_carrito")
+    @JsonBackReference
     private Carrito carrito;
 
     @ManyToOne
     @MapsId("productoId")
     @JoinColumn(name = "id_producto")
+    @JsonManagedReference
     private Producto producto;
 
     @NotNull
@@ -105,7 +110,12 @@ public class CarritoProducto {
 
     @Override
     public String toString() {
-        return "CarritoProducto{" + "id=" + id + ", carrito=" + carrito + ", producto=" + producto + ", cantidadProd=" + cantidadProd + ", precio=" + precio + '}';
+        return "CarritoProducto{"
+                + "id=" + id
+                + ", producto=" + (producto != null ? producto.getId_producto() : "null")
+                + ", cantidadProd=" + cantidadProd
+                + ", precio=" + precio
+                + '}';
     }
 
     @Override
@@ -129,7 +139,5 @@ public class CarritoProducto {
         final CarritoProducto other = (CarritoProducto) obj;
         return Objects.equals(this.id, other.id);
     }
-    
-    
-    
+
 }

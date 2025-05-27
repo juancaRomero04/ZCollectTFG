@@ -7,55 +7,73 @@
   padding: 0;
 }
 
+/* Layout general */
 .perfil-layout {
   display: flex;
-  height: 70vh;
-  padding: 20px;
+  flex-wrap: wrap;
   gap: 20px;
+  padding: 20px;
+  height: auto;
+  justify-content: center;
 }
 
-/* Columna izquierda: perfil */
+/* Columna perfil */
 .perfil-col {
-  width: 35%;
+  flex: 1 1 300px;
+  max-width: 380px;
   background-color: white;
   border-radius: 15px;
-  padding: 30px;
+  padding: 30px 25px;
   border: 2px solid #ccc;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: all 0.3s ease;
+  min-width: 280px;
 }
 
+/* Imagen perfil */
 .perfil-img {
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background-color: #ddd;
   margin-bottom: 20px;
+  object-fit: cover;
+  flex-shrink: 0;
+  min-width: 80px;
 }
 
+/* Info perfil */
 .perfil-info {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 
 .perfil-username {
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 600;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .perfil-email {
-  font-size: 16px;
+  font-size: 1rem; /* 16px */
   color: #555;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .cerrar-sesion {
   background: none;
   border: none;
   color: #a94442;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
@@ -67,42 +85,197 @@
   color: #c9302c;
 }
 
-/* Columna derecha: contenido */
+/* Columna contenido */
 .perfil-body {
-  flex: 1;
+  flex: 2 1 600px;
+  min-width: 300px;
+  max-width: 900px;
   background-color: white;
   border: 2px solid #4da6ff;
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 25px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  height: auto;
+  transition: all 0.3s ease;
 }
 
-/* Footer */
-.footer {
-  display: flex;
-  justify-content: flex-end;
+/* Lista scrollable */
+.carrito-lista {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 12px;
+  margin-bottom: 15px;
+  max-height: 60vh; /* limita alto para scroll */
+  min-height: 200px;
+}
+
+/* Scrollbar personalizado */
+.carrito-lista::-webkit-scrollbar {
+  width: 8px;
+}
+
+.carrito-lista::-webkit-scrollbar-thumb {
+  background-color: rgba(77, 166, 255, 0.5);
+  border-radius: 10px;
+}
+
+.carrito-lista::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Items carrito usando grid para controlar layout */
+.carrito-item {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 15px;
+  padding: 10px 15px;
+  margin-bottom: 12px;
   align-items: center;
-  margin-top: auto;
-  flex-wrap: wrap;
+  max-height: 90px;
+  transition: box-shadow 0.3s ease;
+  cursor: default;
+  word-break: break-word;
+  min-height: 70px;
+}
+
+.carrito-item:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Imagen del carrito */
+.carrito-img {
+  width: 70px;
+  height: 70px;
+  max-width: 70px;
+  max-height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+/* Detalles */
+.carrito-detalles {
+  font-size: 14px;
+  color: #333;
+  overflow: hidden;
+  min-width: 0; /* importante para texto recorte en grid */
+}
+
+.carrito-detalles h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.carrito-detalles p {
+  margin: 0;
+  color: #666;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Precio y cantidad */
+.carrito-precio-cantidad {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  font-weight: 600;
+  color: #007bff;
+  font-size: 14px;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+/* Aseguramos que precio y cantidad no se amontonen usando gap y flex-wrap */
+.carrito-precio-cantidad > * {
+  white-space: nowrap;
+}
+
+.carrito-precio-cantidad .precio-total {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0056b3;
+}
+
+/* Botones cantidad */
+.btn-cantidad {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 4px;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cantidad:hover {
+  background-color: #0056b3;
+}
+
+.cantidad-text {
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Control cantidad */
+.cantidad-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Footer fijo abajo */
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #4da6ff;
+  padding-top: 15px;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .total {
-  margin-right: 15px;
-  font-size: 12px;
-  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  color: #007bff;
+  white-space: nowrap;
 }
 
 .comprar {
-  background-color: #444;
-  color: white;
+  background-color: #007bff;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transition: background-color 0.3s ease;
   border: none;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 14px;
   cursor: pointer;
+  white-space: nowrap;
+  flex-grow: 1;
+  max-width: 220px;
+  text-align: center;
+}
+
+.comprar:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 18px rgba(0, 86, 179, 0.5);
 }
 
 /* Mensaje flotante */
@@ -129,13 +302,120 @@
 }
 
 /* Responsive */
+
+/* Tablets y pantallas medianas */
 @media (max-width: 900px) {
   .perfil-layout {
     flex-direction: column;
+    padding: 15px 10px;
+    height: auto;
   }
 
-  .perfil-col,
-  .perfil-body {
+  .perfil-col, .perfil-body {
+    max-width: 100%;
     width: 100%;
+    min-width: auto;
+  }
+
+  .perfil-col {
+    padding: 25px 20px;
+    margin-bottom: 20px;
+  }
+
+  .perfil-img {
+    max-width: 120px;
+  }
+
+  .perfil-username {
+    font-size: 1.1rem;
+  }
+
+  .perfil-email {
+    font-size: 0.95rem;
+  }
+
+  /* Carrito items en móvil: grid a bloque */
+  .carrito-item {
+    grid-template-columns: 1fr;
+    max-height: none;
+    padding: 12px 15px;
+    gap: 12px;
+  }
+
+  .carrito-img {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .carrito-detalles {
+    font-size: 15px;
+  }
+
+  .carrito-precio-cantidad {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    min-width: auto;
+    font-size: 14px;
+  }
+
+  .btn-cantidad {
+    padding: 8px 18px;
+    margin: 0 4px;
+  }
+
+  .cantidad-text {
+    min-width: 34px;
+    font-size: 16px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .total {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .comprar {
+    width: 100%;
+    max-width: none;
+    font-size: 1.2rem;
+    padding: 16px 0;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .perfil-col {
+    padding: 15px 12px;
+  }
+
+  .perfil-img {
+    max-width: 80px;
+  }
+
+  .perfil-username {
+    font-size: 1rem;
+  }
+
+  .perfil-email {
+    font-size: 0.85rem;
+  }
+
+  .btn-cantidad {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+
+  .cantidad-text {
+    font-size: 14px;
   }
 }

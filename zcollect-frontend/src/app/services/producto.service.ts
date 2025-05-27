@@ -9,6 +9,7 @@ export interface Producto {
   precio: number;
   img_url: string;
   categoria: Categoria;
+  stock: number;
 }
 @Injectable({
   providedIn: 'root'

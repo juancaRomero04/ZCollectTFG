@@ -4,6 +4,7 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -67,6 +68,7 @@ public class Usuario {
     private List<Reseña> reseñas;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Carrito carrito;
 
     public Usuario(String id_user, String username, String email, String password, Date fecha_registro, String telefono, String direccion, Carrito carrito) {

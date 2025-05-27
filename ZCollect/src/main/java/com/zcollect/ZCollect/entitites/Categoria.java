@@ -24,6 +24,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Categoria")
 public class Categoria {
+
     @Id
     @Size(min = 1, max = 36)
     private String id_cat;
@@ -87,7 +88,7 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria{" + "id_cat=" + id_cat + ", nombre=" + nombre + ", descripcion=" + descripcion + ", productos=" + productos + '}';
+        return "Categoria{id_cat='" + id_cat + "', nombre='" + nombre + "'}";
     }
 
     @Override
@@ -111,5 +112,5 @@ public class Categoria {
         final Categoria other = (Categoria) obj;
         return Objects.equals(this.id_cat, other.id_cat);
     }
-    
+
 }
