@@ -3,11 +3,12 @@ import { Categoria, CategoriaService } from '../services/categoria.service';
 import { Producto, ProductoService } from '../services/producto.service';
 import { NgFor } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-catalogo',
-  imports: [NgFor, CommonModule, NgIf, FormsModule],
+  imports: [NgFor, CommonModule, NgIf, FormsModule, RouterModule],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
 })

@@ -1,0 +1,151 @@
+/* Container */
+.producto-detalle {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 3rem auto;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* Imagen */
+.detalle-img-wrapper {
+  flex: 1 1 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  cursor: pointer;
+  /* Animación de hover quitada */
+}
+
+/* Imagen */
+.detalle-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Info */
+.detalle-info {
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Título */
+.detalle-info h1 {
+  font-size: 2.2rem;
+  color: #222;
+  font-weight: 700;
+  margin: 0;
+}
+
+.precio {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #4a4a4a; /* gris oscuro elegante */
+  font-family: 'Merriweather', serif;
+  margin: 0;
+}
+
+
+
+/* Descripción */
+.descripcion {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+  max-height: 6em; /* límite para texto largo */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botones Container */
+.botones {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Botones comunes */
+.btn {
+  padding: 0.85rem 2.2rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  user-select: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón añadir carrito */
+.btn-carrito {
+  background-color: #e63946; /* color rojo plano */
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
+}
+
+.btn-carrito:hover {
+  box-shadow: 0 6px 14px rgba(230, 57, 70, 0.6);
+  /* sin transform */
+}
+
+/* Botón comentarios */
+.btn-comentarios {
+  background-color: #f0f0f0; /* gris claro */
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.btn-comentarios:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  /* sin transform */
+}
+
+/* Responsive: pantallas chicas */
+@media (max-width: 768px) {
+  .producto-detalle {
+    flex-direction: column;
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .detalle-img-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .detalle-info {
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .detalle-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .precio {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .botones {
+    flex-direction: column;
+  }
+}

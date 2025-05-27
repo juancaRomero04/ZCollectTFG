@@ -5,11 +5,13 @@ import { RegistComponent } from './regist/regist.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { InfoComponent } from './info/info.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
+import { InfoProductoComponent } from './info-producto/info-producto.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent},
     { path: 'regist', component: RegistComponent},
     { path: 'perfil', component: PerfilComponent},
     { path: 'info', component: InfoComponent},
-    { path: 'catalogo', component: CatalogoComponent}
+    { path: 'catalogo', component: CatalogoComponent},
+    { path: 'producto/:id', component: InfoProductoComponent }
 ];
