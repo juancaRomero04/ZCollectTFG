@@ -1,3 +1,28 @@
+<!-- Cabecera con filtros y búsqueda -->
+<div class="catalogo-header">
+  <div class="filtros">
+    <label for="filtro">Ordenar por:</label>
+    <select id="filtro" [(ngModel)]="criterioOrden" (change)="ordenarProductos()">
+      <option value="">-- Seleccionar --</option>
+      <option value="precio_asc">Precio (menor a mayor)</option>
+      <option value="precio_desc">Precio (mayor a menor)</option>
+      <option value="nombre_asc">Nombre (A-Z)</option>
+      <option value="nombre_desc">Nombre (Z-A)</option>
+      <option value="categoria_asc">Categoría (A-Z)</option>
+      <option value="categoria_desc">Categoría (Z-A)</option>
+    </select>
+  </div>
+
+  <input
+    type="text"
+    class="busqueda-productos"
+    placeholder="Buscar productos..."
+    [(ngModel)]="textoBusqueda"
+    (input)="filtrarProductos()"
+  />
+</div>
+
+<!-- Contenedor principal del catálogo -->
 <div class="catalogo-container">
   <div *ngFor="let item of categoriasConProductos" class="categoria-block">
     <h2 class="categoria-nombre">{{ item.categoria.nombre }}</h2>
@@ -18,4 +43,9 @@
       </p>
     </div>
   </div>
+
+  <!-- Mensaje cuando no hay productos en ninguna categoría -->
+  <p *ngIf="categoriasConProductos.length === 0" class="no-resultados">
+    No se encontraron productos que coincidan con tu búsqueda.
+  </p>
 </div>
