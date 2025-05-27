@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 5vw;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  padding: 3vw;
+  width: 100%;
+  max-width: 80rem;
+  min-height: 60vh;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4vh;
+}
+
+.logo {
+  width: 70%;
+  height: auto;
+  max-width: 20rem;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  color: red;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
+.footer {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: right;
+}
+
+/* Layout horizontal en pantallas más grandes */
+@media (min-width: 48rem) {
+  .card {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .logo-container {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .content {
+    flex: 2;
+    text-align: left;
+    padding-left: 3vw;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="perfil-layout">
+  <!-- Columna izquierda (Perfil) -->
+  <div class="perfil-col">
+    <img src="assets/userPerfil.png" alt="Perfil" class="perfil-img" />
+    <div class="perfil-info">
+      <div class="perfil-username">{{ usuario?.username }}</div>
+      <div class="perfil-email">{{ usuario?.email }}</div>
+      <button (click)="cerrarSesion()" class="cerrar-sesion">CERRAR SESIÓN</button>
+      
+        <button (click)="eliminarUsuario()" class="cerrar-sesion">ELIMINAR USUARIO</button>
+    </div>
+  </div>
+
+  <!-- Columna derecha (Contenido) -->
+  <div class="perfil-body">
+    <div class="contenedor-blanco">
+      <div class="footer">
+        <span class="total">TOTAL:</span>
+        <button class="comprar">COMPRAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje flotante -->
+  <div *ngIf="mostrarMensaje" class="mensaje-flotante">
+    Sesión cerrada correctamente
+  </div>
+</div>

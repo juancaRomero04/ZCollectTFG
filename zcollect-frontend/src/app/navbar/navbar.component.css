@@ -1,0 +1,103 @@
+/* Logo escritorio (centrado) */
+.logo-img {
+  height: 9em;
+  object-fit: contain;
+}
+
+.navbar-logo {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+
+/* Ocultar logo móvil y botón por defecto */
+.mobile-header {
+  display: none;
+}
+
+/* Ocultar logo escritorio solo en móviles */
+.logo-img-mobile {
+  display: none;
+  height: 8.2em;
+  object-fit: contain;
+}
+
+/* Estilo de navbar general */
+.navbar {
+  min-height: 10em;
+  align-items: center;
+}
+
+.navbar-nav > div {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo links */
+.nav-link {
+  color: #FF3131 !important;
+  font-family: 'Bagel Fat One', cursive;
+  font-size: 1.4rem;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #e60000 !important;
+  transform: scale(1.1);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #e60000;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ---------------- MODO MÓVIL: solo hasta 380px ---------------- */
+@media (max-width: 380px) {
+  /* Mostrar botón hamburguesa y logo móvil */
+  .mobile-header {
+    display: flex !important;
+  }
+
+  .logo-img-mobile {
+    display: inline-block !important;
+  }
+
+  /* Ocultar logo escritorio */
+  .desktop-logo {
+    display: none !important;
+  }
+
+  /* Menú vertical, con separación */
+  .navbar-nav {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .nav-link {
+    font-size: 1.7rem;
+  }
+
+  .menu-left,
+  .menu-right {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
