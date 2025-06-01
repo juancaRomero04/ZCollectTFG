@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductoService, Producto } from '../services/producto.service';
 import { NgIf, CommonModule } from '@angular/common';
 import { CarritoService } from '../services/carrito.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-info-producto',
   imports: [NgIf, CommonModule],
@@ -15,7 +16,8 @@ export class InfoProductoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private router2: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -33,6 +35,9 @@ export class InfoProductoComponent implements OnInit {
         await this.carritoService.agregarProducto(usuarioId, this.producto.id_producto, 1);
         alert(`Producto "${this.producto.nombre}" añadido al carrito.`);
         await this.carritoService.cargarCarrito(usuarioId);
+        setTimeout(() => {
+          this.router2.navigate(['/catalogo']);
+        }, 750);
       }
     } catch (err) {
       console.error('Error al añadir al carrito', err);

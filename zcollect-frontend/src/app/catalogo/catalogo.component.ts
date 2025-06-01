@@ -19,7 +19,7 @@ export class CatalogoComponent implements OnInit {
   categoriasConProductos: { categoria: Categoria; productos: Producto[] }[] = [];
 
   criterioOrden: string = '';
-  textoBusqueda: string = '';  // para el input de búsqueda
+  textoBusqueda: string = '';
 
   constructor(
     private categoriaService: CategoriaService,
@@ -39,12 +39,14 @@ export class CatalogoComponent implements OnInit {
 
   private armarCategoriasConProductos(): void {
     this.categoriasConProductos = this.categorias.map(cat => {
-      const productosFiltrados = this.productos.filter(p => p.categoria?.id_cat === cat.id_cat);
+      const productosFiltrados = this.productos.filter(p =>
+        p.categoria?.id_cat === cat.id_cat && p.stock > 0
+      );
       return {
         categoria: cat,
         productos: productosFiltrados
       };
-    });
+    }).filter(cp => cp.productos.length > 0); // elimina categorías vacías
   }
 
   ordenarProductos(): void {
@@ -68,7 +70,7 @@ export class CatalogoComponent implements OnInit {
         this.categoriasConProductos.sort((a, b) => b.categoria.nombre.localeCompare(a.categoria.nombre));
         break;
       default:
-        // Si no hay criterio o es vacio, no ordenar
+        // No hacer nada
         break;
     }
   }
@@ -83,25 +85,24 @@ export class CatalogoComponent implements OnInit {
     const texto = this.textoBusqueda.trim().toLowerCase();
 
     if (!texto) {
-      // Si el texto de búsqueda está vacío, mostrar todos los productos agrupados normalmente
       this.armarCategoriasConProductos();
       this.ordenarProductos();
       return;
     }
 
-    // Filtramos productos que coinciden con el texto de búsqueda en su nombre o descripción
     this.categoriasConProductos = this.categorias.map(cat => {
       const productosFiltrados = this.productos.filter(p =>
         p.categoria?.id_cat === cat.id_cat &&
+        p.stock > 0 &&
         (p.nombre.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto))
       );
       return {
         categoria: cat,
         productos: productosFiltrados
       };
-    }).filter(cp => cp.productos.length > 0); // eliminamos categorías sin productos tras el filtro
+    }).filter(cp => cp.productos.length > 0);
 
-    this.ordenarProductos(); // mantener orden después del filtro
+    this.ordenarProductos();
   }
 
 

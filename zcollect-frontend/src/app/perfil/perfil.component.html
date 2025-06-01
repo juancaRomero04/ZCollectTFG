@@ -36,7 +36,7 @@
     <!-- TOTAL y botón comprar fijos abajo -->
     <div class="footer">
       <span class="total">TOTAL: {{ getTotal() | currency:'EUR' }}</span>
-      <button class="comprar">COMPRAR</button>
+      <button class="comprar" (click)="irAFormularioCompra()">COMPRAR</button>
     </div>
   </div>
 

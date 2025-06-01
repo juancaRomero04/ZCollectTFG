@@ -4,6 +4,8 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -23,6 +25,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Pedido_Producto")
 public class PedidoProducto {
+
     @EmbeddedId
     private PedidoProductoId id;
     @NotNull
@@ -37,6 +40,7 @@ public class PedidoProducto {
     @ManyToOne
     @MapsId("pedidoId")
     @JoinColumn(name = "pedido_id")
+    @JsonIgnore
     private Pedido pedido;
 
     @ManyToOne
@@ -89,6 +93,10 @@ public class PedidoProducto {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+        if (this.id == null) {
+            this.id = new PedidoProductoId();
+        }
+        this.id.setPedidoId(pedido.getId_pedido());
     }
 
     public Producto getProducto() {
@@ -97,6 +105,10 @@ public class PedidoProducto {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+        if (this.id == null) {
+            this.id = new PedidoProductoId();
+        }
+        this.id.setProductoId(producto.getId_producto());
     }
 
     @Override
@@ -125,5 +137,5 @@ public class PedidoProducto {
         final PedidoProducto other = (PedidoProducto) obj;
         return Objects.equals(this.id, other.id);
     }
-    
+
 }

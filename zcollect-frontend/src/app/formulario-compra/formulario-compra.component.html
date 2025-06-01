@@ -1,0 +1,93 @@
+<div class="formulario-container">
+  <h2>Formulario de Compra</h2>
+
+  <form (ngSubmit)="enviarFormulario()" #form="ngForm" novalidate>
+    <label>
+      Nombre del titular:
+      <input
+        type="text"
+        [(ngModel)]="nombre"
+        name="nombre"
+      />
+    </label>
+    <div class="error-message" *ngIf="erroresCampos['nombreTitular']">
+      <div *ngFor="let err of erroresCampos['nombreTitular']">{{ err }}</div>
+    </div>
+
+    <label>
+      Número de tarjeta:
+      <input
+        type="text"
+        [(ngModel)]="numeroTarjeta"
+        name="numeroTarjeta"
+        maxlength="16"
+      />
+    </label>
+    <div class="error-message" *ngIf="erroresCampos['numeroTarjeta']">
+      <div *ngFor="let err of erroresCampos['numeroTarjeta']">{{ err }}</div>
+    </div>
+
+    <label>
+      CVV:
+      <input
+        type="text"
+        [(ngModel)]="cvv"
+        name="cvv"
+        maxlength="4"
+      />
+    </label>
+    <div class="error-message" *ngIf="erroresCampos['cvv']">
+      <div *ngFor="let err of erroresCampos['cvv']">{{ err }}</div>
+    </div>
+
+    <label>
+      Vencimiento (MM/AA):
+      <input
+        type="text"
+        [(ngModel)]="vencimiento"
+        name="vencimiento"
+        placeholder="MM/AA"
+      />
+    </label>
+    <div class="error-message" *ngIf="erroresCampos['fechaExpiracion']">
+      <div *ngFor="let err of erroresCampos['fechaExpiracion']">{{ err }}</div>
+    </div>
+
+    <label>Tipo de tarjeta:</label>
+    <div class="tarjetas-container">
+      <div
+        class="tarjeta-opcion"
+        tabindex="0"
+        (click)="tipoTarjeta = 'Visa'"
+        [class.selected]="tipoTarjeta === 'Visa'"
+      >
+        <img src="assets/visa.png" alt="Visa" />
+      </div>
+      <div
+        class="tarjeta-opcion"
+        tabindex="0"
+        (click)="tipoTarjeta = 'MasterCard'"
+        [class.selected]="tipoTarjeta === 'MasterCard'"
+      >
+        <img src="assets/mastercard.png" alt="MasterCard" />
+      </div>
+    </div>
+    <div class="error-message" *ngIf="erroresCampos['tipoTarjeta']">
+      <div *ngFor="let err of erroresCampos['tipoTarjeta']">{{ err }}</div>
+    </div>
+
+    <button type="submit" [disabled]="cargando">
+      Pagar
+    </button>
+  </form>
+
+  <p
+    *ngIf="mensaje"
+    [ngClass]="{
+      'error-message': mensaje.startsWith('Error') || !mensaje.startsWith('Perfecto'),
+      'success-message': mensaje.startsWith('Perfecto')
+    }"
+  >
+    {{ mensaje }}
+  </p>
+</div>

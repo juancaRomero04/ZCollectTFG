@@ -116,5 +116,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
     this.actualizarCantidadProducto(idProducto, nuevaCantidad);
   }
 
-
+  irAFormularioCompra() {
+    this.router.navigate(['/formulario-compra']);
+  }
 }
