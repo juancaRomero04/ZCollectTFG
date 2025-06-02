@@ -4,6 +4,7 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -32,6 +33,7 @@ public class Rol {
     private String nombre;
 
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    @JsonManagedReference("user-role")
     private List<UserRole> userRoles;
 
     public Rol(String id_role, String nombre) {

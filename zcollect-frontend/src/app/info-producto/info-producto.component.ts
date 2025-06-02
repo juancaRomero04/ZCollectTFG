@@ -4,9 +4,11 @@ import { ProductoService, Producto } from '../services/producto.service';
 import { NgIf, CommonModule } from '@angular/common';
 import { CarritoService } from '../services/carrito.service';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-info-producto',
-  imports: [NgIf, CommonModule],
+  imports: [NgIf, CommonModule, RouterLink],
   templateUrl: './info-producto.component.html',
   styleUrl: './info-producto.component.css'
 })

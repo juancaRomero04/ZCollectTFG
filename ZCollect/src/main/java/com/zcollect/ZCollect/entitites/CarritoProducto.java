@@ -5,6 +5,7 @@
 package com.zcollect.ZCollect.entitites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -35,13 +36,11 @@ public class CarritoProducto {
     @ManyToOne
     @MapsId("carritoId")
     @JoinColumn(name = "id_carrito")
-    @JsonBackReference
     private Carrito carrito;
 
     @ManyToOne
     @MapsId("productoId")
     @JoinColumn(name = "id_producto")
-    @JsonManagedReference
     private Producto producto;
 
     @NotNull

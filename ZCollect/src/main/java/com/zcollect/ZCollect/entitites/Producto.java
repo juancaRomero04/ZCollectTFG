@@ -5,8 +5,11 @@
 package com.zcollect.ZCollect.entitites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -65,10 +68,11 @@ public class Producto {
     private List<PedidoProducto> pedidos;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnore
     private List<CarritoProducto> carritos;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonManagedReference("producto-reseñas")
     private List<Reseña> reseñas;
 
     public Producto(String id_producto, String nombre, String descripcion, BigDecimal precio, int stock, String img_url, Categoria categoria) {

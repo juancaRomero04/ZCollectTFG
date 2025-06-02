@@ -7,8 +7,8 @@
     <p class="precio">{{ producto.precio | currency:'EUR' }}</p>
     <p class="descripcion">{{ producto.descripcion }}</p>
     <div class="botones">
-      <button class="btn btn-carrito" (click)="agregarAlCarrito()">Añadir al carrito 🛒</button>
-      <button class="btn btn-comentarios">Comentarios 💬</button>
+      <button class="btn btn-carrito" (click)="agregarAlCarrito()">Añadir al carrito</button>
+      <button class="btn btn-comentarios" [routerLink]="['/comentarios', producto.id_producto]">Comentarios</button>
     </div>
   </div>
 </div>

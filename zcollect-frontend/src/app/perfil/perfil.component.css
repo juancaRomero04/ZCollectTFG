@@ -7,7 +7,6 @@
   padding: 0;
 }
 
-/* Layout general */
 .perfil-layout {
   display: flex;
   flex-wrap: wrap;
@@ -17,7 +16,6 @@
   justify-content: center;
 }
 
-/* Columna perfil */
 .perfil-col {
   flex: 1 1 300px;
   max-width: 380px;
@@ -33,7 +31,6 @@
   min-width: 280px;
 }
 
-/* Imagen perfil */
 .perfil-img {
   width: 100%;
   max-width: 140px;
@@ -47,7 +44,6 @@
   min-width: 80px;
 }
 
-/* Info perfil */
 .perfil-info {
   display: flex;
   flex-direction: column;
@@ -56,14 +52,14 @@
 }
 
 .perfil-username {
-  font-size: 1.25rem; /* 20px */
+  font-size: 1.25rem;
   font-weight: 600;
   word-break: break-word;
   white-space: normal;
 }
 
 .perfil-email {
-  font-size: 1rem; /* 16px */
+  font-size: 1rem;
   color: #555;
   word-break: break-word;
   white-space: normal;
@@ -73,7 +69,7 @@
   background: none;
   border: none;
   color: #a94442;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
@@ -85,7 +81,6 @@
   color: #c9302c;
 }
 
-/* Columna contenido */
 .perfil-body {
   flex: 2 1 600px;
   min-width: 300px;
@@ -100,17 +95,15 @@
   transition: all 0.3s ease;
 }
 
-/* Lista scrollable */
 .carrito-lista {
   flex-grow: 1;
   overflow-y: auto;
   padding-right: 12px;
   margin-bottom: 15px;
-  max-height: 60vh; /* limita alto para scroll */
+  max-height: 60vh;
   min-height: 200px;
 }
 
-/* Scrollbar personalizado */
 .carrito-lista::-webkit-scrollbar {
   width: 8px;
 }
@@ -124,7 +117,6 @@
   background: transparent;
 }
 
-/* Items carrito usando grid para controlar layout */
 .carrito-item {
   background-color: #f8f9fa;
   border-radius: 12px;
@@ -146,7 +138,6 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Imagen del carrito */
 .carrito-img {
   width: 70px;
   height: 70px;
@@ -158,19 +149,17 @@
   flex-shrink: 0;
 }
 
-/* Detalles */
 .carrito-detalles {
   font-size: 14px;
   color: #333;
   overflow: hidden;
-  min-width: 0; /* importante para texto recorte en grid */
+  min-width: 0;
 }
 
 .carrito-detalles h3 {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 2px;
-  overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;
 }
@@ -179,11 +168,9 @@
   margin: 0;
   color: #666;
   white-space: normal;
-  overflow-wrap: break-word;
   word-break: break-word;
 }
 
-/* Precio y cantidad */
 .carrito-precio-cantidad {
   display: flex;
   flex-direction: column;
@@ -192,11 +179,11 @@
   font-weight: 600;
   color: #007bff;
   font-size: 14px;
-  min-width: 90px;
-  flex-shrink: 0;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
-/* Aseguramos que precio y cantidad no se amontonen usando gap y flex-wrap */
 .carrito-precio-cantidad > * {
   white-space: nowrap;
 }
@@ -207,18 +194,19 @@
   color: #0056b3;
 }
 
-/* Botones cantidad */
 .btn-cantidad {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 6px;
   font-weight: 700;
   cursor: pointer;
   margin: 0 4px;
   user-select: none;
   transition: background-color 0.3s ease;
+  min-width: 32px;
+  font-size: 14px;
 }
 
 .btn-cantidad:hover {
@@ -230,16 +218,17 @@
   min-width: 30px;
   text-align: center;
   display: inline-block;
+  font-size: 14px;
 }
 
-/* Control cantidad */
 .cantidad-control {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Footer fijo abajo */
 .footer {
   flex-shrink: 0;
   display: flex;
@@ -278,7 +267,6 @@
   box-shadow: 0 6px 18px rgba(0, 86, 179, 0.5);
 }
 
-/* Mensaje flotante */
 .mensaje-flotante {
   position: fixed;
   top: 20px;
@@ -301,9 +289,6 @@
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
 
-/* Responsive */
-
-/* Tablets y pantallas medianas */
 @media (max-width: 900px) {
   .perfil-layout {
     flex-direction: column;
@@ -334,7 +319,6 @@
     font-size: 0.95rem;
   }
 
-  /* Carrito items en móvil: grid a bloque */
   .carrito-item {
     grid-template-columns: 1fr;
     max-height: none;
@@ -361,6 +345,8 @@
     gap: 10px;
     min-width: auto;
     font-size: 14px;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   .btn-cantidad {
@@ -392,7 +378,6 @@
   }
 }
 
-/* Móviles pequeños */
 @media (max-width: 480px) {
   .perfil-col {
     padding: 15px 12px;

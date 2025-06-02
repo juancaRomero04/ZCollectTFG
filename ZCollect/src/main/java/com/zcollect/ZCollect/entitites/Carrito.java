@@ -5,7 +5,9 @@
 package com.zcollect.ZCollect.entitites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,6 +28,7 @@ import java.util.Objects;
  *
  * @author juanca
  */
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id_carrito")
 @Entity
 @Table(name = "Carrito")
 public class Carrito {
@@ -40,11 +43,9 @@ public class Carrito {
 
     @OneToOne
     @JoinColumn(name = "id_user")
-    @JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<CarritoProducto> productos;
 
     public Carrito(String id_carrito, Date fechaC, Usuario usuario) {

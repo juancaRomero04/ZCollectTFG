@@ -4,10 +4,12 @@
  */
 package com.zcollect.ZCollect.controllers;
 
+import com.zcollect.ZCollect.DTOs.ReseñaDTO;
 import com.zcollect.ZCollect.entitites.Reseña;
 import com.zcollect.ZCollect.services.ReseñaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,23 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/reseñas")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class ReseñaController {
     @Autowired
     private ReseñaService reseñaService;
 
-    // Obtener reseñas por producto
+    // ✅ Retorna DTOs con info del usuario para un producto
     @GetMapping("/producto/{productoId}")
-    public List<Reseña> obtenerPorProducto(@PathVariable String productoId) {
-        return reseñaService.obtenerPorProducto(productoId);
+    public List<ReseñaDTO> obtenerDTOsPorProducto(@PathVariable String productoId) {
+        return reseñaService.obtenerDTOsPorProducto(productoId);
     }
 
-    // Crear nueva reseña
+    // ✅ Crear una nueva reseña
     @PostMapping
     public Reseña crearReseña(@RequestBody Reseña reseña) {
         return reseñaService.guardarReseña(reseña);
     }
 
-    // Eliminar reseña por ID
+    // ✅ Eliminar una reseña por ID
     @DeleteMapping("/{id}")
     public void eliminarReseña(@PathVariable String id) {
         reseñaService.eliminarReseña(id);

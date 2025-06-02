@@ -65,8 +65,8 @@
   left: 0;
 }
 
-/* ---------------- MODO MÓVIL: solo hasta 380px ---------------- */
-@media (max-width: 380px) {
+/* ---------------- MODO MÓVIL: hasta 575px ---------------- */
+@media (max-width: 575px) {
   /* Mostrar botón hamburguesa y logo móvil */
   .mobile-header {
     display: flex !important;
@@ -90,7 +90,7 @@
   }
 
   .nav-link {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
   }
 
   .menu-left,

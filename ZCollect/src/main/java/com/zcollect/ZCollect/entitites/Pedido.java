@@ -4,6 +4,7 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -54,6 +55,7 @@ public class Pedido {
     // Relaciones
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference("pedido-usuario")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)

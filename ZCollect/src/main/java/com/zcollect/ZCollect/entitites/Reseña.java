@@ -4,6 +4,7 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -32,11 +33,13 @@ public class Reseña {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonBackReference("usuario-reseñas")
     private Usuario usuario;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_producto")
+    @JsonBackReference("producto-reseñas")
     private Producto producto;
 
     @Size(max = 1000)

@@ -4,6 +4,7 @@
  */
 package com.zcollect.ZCollect.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -26,11 +27,13 @@ public class UserRole implements Serializable{
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
+    @JsonBackReference("roler-user")
     private Usuario usuario;
 
     @ManyToOne
     @MapsId("roleId")
     @JoinColumn(name = "role_id")
+    @JsonBackReference("user-role")
     private Rol rol;
 
     public UserRole(UserRoleId id, Usuario usuario, Rol rol) {
