@@ -257,3 +257,68 @@ select:focus {
     font-size: 1rem;
   }
 }
+/* ------------------------------- */
+/* Botones de administrador       */
+/* ------------------------------- */
+
+.producto-acciones {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.producto-acciones button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Botón Editar */
+.producto-acciones button:first-child {
+  background-color: #ffd966;
+  color: #333;
+}
+
+.producto-acciones button:first-child:hover {
+  background-color: #ffca2b;
+  transform: scale(1.05);
+}
+
+/* Botón Eliminar */
+.producto-acciones button:last-child {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.producto-acciones button:last-child:hover {
+  background-color: #e54343;
+  transform: scale(1.05);
+}
+.producto-acciones button {
+  width: 100%;
+  text-align: center;
+}
+.btn-anadir {
+  background-color: #4caf50;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 1.875rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.75rem rgba(76, 175, 80, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-anadir:hover {
+  background-color: #43a047;
+  transform: scale(1.05);
+}

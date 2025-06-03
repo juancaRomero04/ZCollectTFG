@@ -9,6 +9,7 @@ import { InfoProductoComponent } from './info-producto/info-producto.component';
 import { FormularioCompraComponent } from './formulario-compra/formulario-compra.component';
 import { ResenaProductoComponent } from './resena-producto/resena-producto.component';
 import { authGuard } from './guards/auth.guard';
+import { AdminProductoComponent } from './admin-producto/admin-producto.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent},
@@ -18,6 +19,8 @@ export const routes: Routes = [
     { path: 'catalogo', component: CatalogoComponent},
     { path: 'producto/:id', component: InfoProductoComponent },
     { path: 'formulario-compra', component: FormularioCompraComponent, canActivate: [authGuard] },
-    { path: 'comentarios/:id', component: ResenaProductoComponent, canActivate: [authGuard] }
+    { path: 'comentarios/:id', component: ResenaProductoComponent, canActivate: [authGuard] },
+    { path: 'admin/producto', component: AdminProductoComponent },             // Nuevo
+    { path: 'admin/producto/:id', component: AdminProductoComponent }         // Editar
 
 ];

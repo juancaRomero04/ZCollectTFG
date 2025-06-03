@@ -5,6 +5,8 @@
 package com.zcollect.ZCollect.DTOs;
 
 import com.zcollect.ZCollect.entitites.Usuario;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -14,12 +16,18 @@ public class UsuarioLoginResponseDTO {
     private String id;
     private String username;
     private String email;
+    private List<String> roles;  // <-- nueva propiedad
 
     public UsuarioLoginResponseDTO(Usuario usuario) {
         this.id = usuario.getId_user();
         this.username = usuario.getUsername();
         this.email = usuario.getEmail();
+        // Extraemos los nombres de roles de la entidad Usuario
+        this.roles = usuario.getRoles().stream()
+            .map(userRole -> userRole.getRol().getNombre())
+            .collect(Collectors.toList());
     }
+
 
     public String getId() {
         return id;
@@ -43,6 +51,14 @@ public class UsuarioLoginResponseDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
     
 }

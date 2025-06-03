@@ -6,7 +6,7 @@
   margin: 3rem auto;
   background-color: #fff;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 2rem;
   gap: 2.5rem;
@@ -16,17 +16,18 @@
 /* Imagen */
 .detalle-img-wrapper {
   flex: 1 1 320px;
+  width: 320px;
+  height: 320px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  /* Animación de hover quitada */
 }
 
 /* Imagen */
 .detalle-img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
   object-fit: cover;
 }
@@ -51,12 +52,10 @@
 .precio {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #4a4a4a; /* gris oscuro elegante */
+  color: #4a4a4a;
   font-family: 'Merriweather', serif;
   margin: 0;
 }
-
-
 
 /* Descripción */
 .descripcion {
@@ -64,7 +63,7 @@
   color: #555;
   line-height: 1.6;
   margin: 0;
-  max-height: 6em; /* límite para texto largo */
+  max-height: 6em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -92,26 +91,24 @@
 
 /* Botón añadir carrito */
 .btn-carrito {
-  background-color: #e63946; /* color rojo plano */
+  background-color: #e63946;
   color: #fff;
   box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
 }
 
 .btn-carrito:hover {
   box-shadow: 0 6px 14px rgba(230, 57, 70, 0.6);
-  /* sin transform */
 }
 
 /* Botón comentarios */
 .btn-comentarios {
-  background-color: #f0f0f0; /* gris claro */
+  background-color: #f0f0f0;
   color: #444;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-comentarios:hover {
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  /* sin transform */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* Responsive: pantallas chicas */
@@ -124,7 +121,14 @@
 
   .detalle-img-wrapper {
     width: 100%;
-    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* Mantiene forma cuadrada responsiva */
+  }
+
+  .detalle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .detalle-info {

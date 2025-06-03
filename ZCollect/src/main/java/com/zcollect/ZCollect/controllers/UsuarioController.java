@@ -160,5 +160,5 @@ public class UsuarioController {
 
         return ResponseEntity.ok(Map.of("mensaje", "Usuario eliminado correctamente"));
     }
-
+    
 }

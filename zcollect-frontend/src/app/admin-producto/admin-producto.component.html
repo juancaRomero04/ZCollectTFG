@@ -1,0 +1,40 @@
+<div class="form-container">
+  <h2>{{ esNuevo ? 'Añadir nuevo producto' : 'Editar producto' }}</h2>
+
+  <form (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input [(ngModel)]="producto.nombre" name="nombre" required />
+    </div>
+
+    <div class="form-group">
+      <label>Descripción:</label>
+      <textarea [(ngModel)]="producto.descripcion" name="descripcion"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Precio (€):</label>
+      <input type="number" [(ngModel)]="producto.precio" name="precio" required />
+    </div>
+
+    <div class="form-group">
+      <label>Stock:</label>
+      <input type="number" [(ngModel)]="producto.stock" name="stock" required />
+    </div>
+
+    <div class="form-group">
+      <label>URL de imagen:</label>
+      <input [(ngModel)]="producto.img_url" name="img_url" />
+    </div>
+
+    <div class="form-group">
+      <label>Categoría:</label>
+      <select [(ngModel)]="producto.categoria.id_cat" name="categoria" required>
+        <option *ngFor="let cat of categorias" [value]="cat.id_cat">{{ cat.nombre }}</option>
+      </select>
+    </div>
+
+    <button type="submit">{{ esNuevo ? 'Crear' : 'Actualizar' }}</button>
+    <button type="button" (click)="router.navigate(['/catalogo'])">Cancelar</button>
+  </form>
+</div>

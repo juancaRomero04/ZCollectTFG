@@ -30,6 +30,19 @@ public class ProductoService {
     }
 
     public Producto saveProducto(Producto producto) {
+        if (producto.getId_producto() == null || producto.getId_producto().isEmpty()) {
+            long totalProductos = productoRepository.count();
+            String nuevoId = "prod-" + (totalProductos + 1);
+
+            // Verifica si ya existe ese ID (por si hubo eliminaciones)
+            while (productoRepository.existsById(nuevoId)) {
+                totalProductos++;
+                nuevoId = "prod-" + (totalProductos + 1);
+            }
+
+            producto.setId_producto(nuevoId);
+        }
+
         return productoRepository.save(producto);
     }
 

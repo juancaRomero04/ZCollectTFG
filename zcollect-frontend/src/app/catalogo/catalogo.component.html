@@ -13,14 +13,11 @@
     </select>
   </div>
 
-  <input
-    type="text"
-    class="busqueda-productos"
-    placeholder="Buscar productos..."
-    [(ngModel)]="textoBusqueda"
-    (input)="filtrarProductos()"
-  />
+  <input type="text" class="busqueda-productos" placeholder="Buscar productos..." [(ngModel)]="textoBusqueda"
+    (input)="filtrarProductos()" />
 </div>
+<button *ngIf="esAdmin" class="btn-anadir" (click)="anadirProducto()">Añadir nuevo producto</button>
+
 
 <!-- Contenedor principal del catálogo -->
 <div class="catalogo-container">
@@ -28,17 +25,22 @@
     <h2 class="categoria-nombre">{{ item.categoria.nombre }}</h2>
 
     <div class="productos-grid">
-      <a *ngFor="let producto of item.productos"
-         [routerLink]="['/producto', producto.id_producto]"
-         class="producto-card">
-        <div class="producto-img-wrapper">
-          <img [src]="producto.img_url" alt="{{ producto.nombre }}" class="producto-img" />
+      <div *ngFor="let producto of item.productos" class="producto-card-wrapper">
+        <a [routerLink]="['/producto', producto.id_producto]" class="producto-card">
+          <div class="producto-img-wrapper">
+            <img [src]="producto.img_url" alt="{{ producto.nombre }}" class="producto-img" />
+          </div>
+          <div class="producto-info">
+            <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+            <p class="producto-precio">{{ producto.precio | currency:'EUR' }}</p>
+          </div>
+        </a>
+
+        <div *ngIf="esAdmin" class="producto-acciones">
+          <button (click)="editarProducto(producto)">Editar</button>
+          <button (click)="eliminarProducto(producto.id_producto)">Eliminar</button>
         </div>
-        <div class="producto-info">
-          <h3 class="producto-nombre">{{ producto.nombre }}</h3>
-          <p class="producto-precio">{{ producto.precio | currency:'EUR' }}</p>
-        </div>
-      </a>
+      </div>
 
       <p *ngIf="item.productos.length === 0" class="text-muted">
         No hay productos en esta categoría.

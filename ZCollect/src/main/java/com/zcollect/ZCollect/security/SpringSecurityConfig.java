@@ -65,7 +65,10 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/carrito/**").authenticated()
                 .requestMatchers("/", "/usuarios/login", "/usuarios/registro").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/productos/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/productos/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/productos/**", "/categorias/**", "/reseñas/**").permitAll()
+                
                 .requestMatchers(HttpMethod.DELETE, "/usuarios/**").authenticated()
                 .requestMatchers("/usuarios/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/pedidos/**").authenticated()
