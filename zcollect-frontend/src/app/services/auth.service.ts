@@ -24,7 +24,7 @@ export class AuthService {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
-      credentials: 'include' 
+      credentials: 'include'
     }).then(async res => {
       if (!res.ok) throw new Error('Credenciales inválidas');
       const userData = await res.json();
@@ -43,6 +43,9 @@ export class AuthService {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('usuario'); // limpiar usuario guardado
     this.loggedIn.next(false);
+  }
+  isLogged(): boolean {
+    return this.loggedIn.value;
   }
 
 

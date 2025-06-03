@@ -8,15 +8,16 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { InfoProductoComponent } from './info-producto/info-producto.component';
 import { FormularioCompraComponent } from './formulario-compra/formulario-compra.component';
 import { ResenaProductoComponent } from './resena-producto/resena-producto.component';
+import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent},
     { path: 'regist', component: RegistComponent},
-    { path: 'perfil', component: PerfilComponent},
+    { path: 'perfil', component: PerfilComponent, canActivate: [authGuard]},
     { path: 'info', component: InfoComponent},
     { path: 'catalogo', component: CatalogoComponent},
     { path: 'producto/:id', component: InfoProductoComponent },
-    { path: 'formulario-compra', component: FormularioCompraComponent },
-    { path: 'comentarios/:id', component: ResenaProductoComponent }
+    { path: 'formulario-compra', component: FormularioCompraComponent, canActivate: [authGuard] },
+    { path: 'comentarios/:id', component: ResenaProductoComponent, canActivate: [authGuard] }
 
 ];

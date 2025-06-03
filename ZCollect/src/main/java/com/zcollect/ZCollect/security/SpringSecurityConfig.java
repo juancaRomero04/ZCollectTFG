@@ -63,10 +63,13 @@ public class SpringSecurityConfig {
         }))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/carrito/**").authenticated()
+                .requestMatchers("/", "/usuarios/login", "/usuarios/registro").permitAll()
+                .requestMatchers(HttpMethod.GET, "/productos/**", "/categorias/**", "/reseñas/**").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/usuarios/**").authenticated()
-                .requestMatchers("/usuarios/login", "/usuarios/registro", "/", "/carrito/**", "/productos/**").permitAll()
-                .requestMatchers("/categorias/**", "/pedidos/**", "/reseñas/**").permitAll()
                 .requestMatchers("/usuarios/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/pedidos/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "/pedidos/**", "/reseñas/**").authenticated()
                 .anyRequest().authenticated()
                 )
                 //                .formLogin(form -> form
