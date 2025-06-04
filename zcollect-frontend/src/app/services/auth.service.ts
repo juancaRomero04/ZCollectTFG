@@ -28,7 +28,7 @@ export class AuthService {
     }).then(async res => {
       if (!res.ok) throw new Error('Credenciales inválidas');
       const userData = await res.json();
-
+      console.log('🚨 Usuario recibido del backend:', userData);
       localStorage.setItem('loggedIn', 'true');
       localStorage.setItem('usuario', JSON.stringify(userData));
 

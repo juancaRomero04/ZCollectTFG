@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -160,5 +161,44 @@ public class UsuarioController {
 
         return ResponseEntity.ok(Map.of("mensaje", "Usuario eliminado correctamente"));
     }
-    
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizarUsuario(
+            @PathVariable String id,
+            @RequestBody Usuario datosActualizados,
+            Authentication authentication) {
+
+        if (authentication == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "No autenticado"));
+        }
+
+        Optional<Usuario> usuarioOpt = usuarioService.getUsuarioById(id);
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Usuario no encontrado"));
+        }
+
+        Usuario existente = usuarioOpt.get();
+
+        boolean esAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (!esAdmin && !existente.getUsername().equals(authentication.getName())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("error", "No autorizado"));
+        }
+
+        // Actualizar campos básicos y password (sin roles)
+        existente.setUsername(datosActualizados.getUsername());
+        existente.setEmail(datosActualizados.getEmail());
+        existente.setTelefono(datosActualizados.getTelefono());
+        existente.setDireccion(datosActualizados.getDireccion());
+
+        if (datosActualizados.getPassword() != null && !datosActualizados.getPassword().isBlank()) {
+            existente.setPassword(passwordEncoder.encode(datosActualizados.getPassword()));
+        }
+
+        usuarioService.saveUsuario(existente);
+
+        return ResponseEntity.ok(new UsuarioResponseDTO(existente));
+    }
+
 }

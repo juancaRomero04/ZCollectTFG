@@ -119,4 +119,8 @@ export class PerfilComponent implements OnInit, OnDestroy {
   irAFormularioCompra() {
     this.router.navigate(['/formulario-compra']);
   }
+  irAGestionUsuarios(): void {
+    this.router.navigate(['/admin/usuarios']);
+  }
+
 }

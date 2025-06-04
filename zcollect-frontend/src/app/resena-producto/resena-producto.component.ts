@@ -15,11 +15,17 @@ export class ResenaProductoComponent {
   resenas: any[] = [];
   comentario: string = '';
   calificacion: number = 5;
+  isAdmin: boolean = false;
 
-  constructor(private route: ActivatedRoute, private resenaService: ResenaService) { }
+  constructor(private route: ActivatedRoute, private resenaService: ResenaService) {}
 
   async ngOnInit(): Promise<void> {
     this.productoId = this.route.snapshot.paramMap.get('id') || '';
+    const usuarioStr = localStorage.getItem('usuario');
+    if (usuarioStr) {
+      const usuario = JSON.parse(usuarioStr);
+      this.isAdmin = usuario.roles?.includes('ROLE_ADMIN');
+    }
     await this.cargarResenas();
   }
 
@@ -32,7 +38,6 @@ export class ResenaProductoComponent {
   }
 
   async enviarResena() {
-    // Validación básica
     if (!this.comentario || this.comentario.trim().length < 3) {
       alert('El comentario debe tener al menos 3 caracteres.');
       return;
@@ -62,9 +67,20 @@ export class ResenaProductoComponent {
     }
   }
 
-  // Devuelve un array con N elementos, para usar en *ngFor y mostrar estrellas
   getEstrellas(num: number): any[] {
     return new Array(num);
+  }
+
+  async eliminarResena(id: string) {
+    if (!confirm('¿Estás seguro de eliminar esta reseña?')) return;
+
+    try {
+      await this.resenaService.eliminarResena(id);
+      await this.cargarResenas();
+    } catch (err) {
+      console.error('Error al eliminar reseña:', err);
+      alert('No se pudo eliminar la reseña.');
+    }
   }
 
 }

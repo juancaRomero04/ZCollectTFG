@@ -30,10 +30,14 @@ export class ResenaService {
 
   // Eliminar reseña por ID
   async eliminarResena(id: string) {
-    const response = await fetch(`${this.baseUrl}/${id}`, {
+    return fetch(`http://localhost:8080/reseñas/${id}`, {
       method: 'DELETE',
-      credentials: 'include'
+      credentials: 'include',
+    }).then(async res => {
+      if (!res.ok) {
+        throw new Error('Error al eliminar reseña');
+      }
     });
-    if (!response.ok) throw new Error('Error al eliminar reseña');
   }
+
 }

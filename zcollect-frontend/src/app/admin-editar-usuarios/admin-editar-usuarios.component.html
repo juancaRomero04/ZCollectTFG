@@ -1,0 +1,52 @@
+<h2>Editar Usuario</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+  <div>
+    <label for="username">Nombre de usuario:</label>
+    <input id="username" formControlName="username" type="text" />
+    <div *ngIf="form.controls['username'].touched && form.controls['username'].invalid" style="color:red;">
+      <div *ngIf="form.controls['username'].errors?.['required']">El nombre de usuario es obligatorio.</div>
+      <div *ngIf="form.controls['username'].errors?.['maxlength']">El nombre de usuario debe tener máximo 50 caracteres.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" type="email" />
+    <div *ngIf="form.controls['email'].touched && form.controls['email'].invalid" style="color:red;">
+      <div *ngIf="form.controls['email'].errors?.['required']">El email es obligatorio.</div>
+      <div *ngIf="form.controls['email'].errors?.['pattern'] || form.controls['email'].errors?.['email']">El correo electrónico no es válido.</div>
+      <div *ngIf="form.controls['email'].errors?.['maxlength']">El email debe tener máximo 100 caracteres.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="telefono">Teléfono:</label>
+    <input id="telefono" formControlName="telefono" type="text" />
+    <div *ngIf="form.controls['telefono'].touched && form.controls['telefono'].invalid" style="color:red;">
+      <div *ngIf="form.controls['telefono'].errors?.['required']">El teléfono es obligatorio.</div>
+      <div *ngIf="form.controls['telefono'].errors?.['pattern']">El número de teléfono no es válido. Debe tener 9 dígitos.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="direccion">Dirección:</label>
+    <input id="direccion" formControlName="direccion" type="text" />
+    <div *ngIf="form.controls['direccion'].touched && form.controls['direccion'].invalid" style="color:red;">
+      <div *ngIf="form.controls['direccion'].errors?.['required']">La dirección es obligatoria.</div>
+      <div *ngIf="form.controls['direccion'].errors?.['maxlength']">La dirección debe tener máximo 255 caracteres.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Contraseña (dejar vacío para no cambiar):</label>
+    <input id="password" formControlName="password" type="password" />
+    <div *ngIf="form.controls['password'].touched && form.controls['password'].invalid" style="color:red;">
+      <div *ngIf="form.controls['password'].errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</div>
+      <div *ngIf="form.controls['password'].errors?.['maxlength']">La contraseña debe tener máximo 255 caracteres.</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+  <button type="button" (click)="cancelar()">Cancelar</button>
+</form>

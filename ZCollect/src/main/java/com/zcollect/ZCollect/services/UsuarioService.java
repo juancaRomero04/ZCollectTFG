@@ -78,4 +78,24 @@ public class UsuarioService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
+    public Usuario actualizarUsuario(String id, Usuario datosActualizados) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+        if (usuarioOpt.isEmpty()) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        Usuario existente = usuarioOpt.get();
+
+        existente.setUsername(datosActualizados.getUsername());
+        existente.setEmail(datosActualizados.getEmail());
+        existente.setTelefono(datosActualizados.getTelefono());
+        existente.setDireccion(datosActualizados.getDireccion());
+
+        if (datosActualizados.getPassword() != null && !datosActualizados.getPassword().isBlank()) {
+            existente.setPassword(passwordEncoder.encode(datosActualizados.getPassword()));
+        }
+
+        return usuarioRepository.save(existente);
+    }
+
 }

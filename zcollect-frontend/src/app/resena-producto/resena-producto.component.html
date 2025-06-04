@@ -1,32 +1,36 @@
 <div class="contenedor-comentarios">
-    <h2>Reseñas del producto</h2>
+  <h2>Reseñas del producto</h2>
 
-    <div class="resena" *ngFor="let res of resenas">
-        <p><strong>{{ res.username || 'Usuario' }}</strong></p>
-        <p>
-            Valoración:
-            <span *ngFor="let _ of getEstrellas(res.calificacion)">⭐</span>
-        </p>
-        <p>{{ res.comentario }}</p>
-        <hr />
-    </div>
-
-    <h3>Escribe tu reseña</h3>
-    <textarea [(ngModel)]="comentario" placeholder="Tu opinión..." rows="4"></textarea>
-    <p *ngIf="
-      comentario &&
-      comentario.trim().length > 0 &&
-      comentario.trim().length < 3
-    " style="color: red; font-size: 0.9rem; margin-top: 0.3rem;">
-        El comentario debe tener al menos 3 caracteres.
+  <div class="resena" *ngFor="let res of resenas">
+    <p><strong>{{ res.username || 'Usuario' }}</strong></p>
+    <p>
+      Valoración:
+      <span *ngFor="let _ of getEstrellas(res.calificacion)">⭐</span>
     </p>
+    <p>{{ res.comentario }}</p>
 
-    <label for="calificacion">Valoración:</label>
-    <select [(ngModel)]="calificacion" id="calificacion">
-        <option *ngFor="let i of [1, 2, 3, 4, 5]" [value]="i">{{ i }}</option>
-    </select>
-
-    <button (click)="enviarResena()" [disabled]="!comentario || comentario.trim().length < 3">
-        Enviar reseña
+    <!-- ✅ Botón solo visible para admins -->
+    <button *ngIf="isAdmin" (click)="eliminarResena(res.idRes)"
+      style="color: red; background-color: transparent; border: none; cursor: pointer;">
+      Eliminar reseña
     </button>
+
+    <hr />
+  </div>
+
+  <h3>Escribe tu reseña</h3>
+  <textarea [(ngModel)]="comentario" placeholder="Tu opinión..." rows="4"></textarea>
+  <p *ngIf="comentario && comentario.trim().length > 0 && comentario.trim().length < 3"
+     style="color: red; font-size: 0.9rem; margin-top: 0.3rem;">
+    El comentario debe tener al menos 3 caracteres.
+  </p>
+
+  <label for="calificacion">Valoración:</label>
+  <select [(ngModel)]="calificacion" id="calificacion">
+    <option *ngFor="let i of [1, 2, 3, 4, 5]" [value]="i">{{ i }}</option>
+  </select>
+
+  <button (click)="enviarResena()" [disabled]="!comentario || comentario.trim().length < 3">
+    Enviar reseña
+  </button>
 </div>

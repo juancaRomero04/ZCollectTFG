@@ -7,6 +7,11 @@
       <div class="perfil-email">{{ usuario?.email }}</div>
       <button (click)="cerrarSesion()" class="cerrar-sesion">CERRAR SESIÓN</button>
       <button (click)="eliminarUsuario()" class="cerrar-sesion">ELIMINAR USUARIO</button>
+      <button *ngIf="usuario?.roles?.includes('ROLE_ADMIN')" class="gestionar" (click)="irAGestionUsuarios()">
+        GESTIONAR USUARIOS
+      </button>
+
+
     </div>
   </div>
 

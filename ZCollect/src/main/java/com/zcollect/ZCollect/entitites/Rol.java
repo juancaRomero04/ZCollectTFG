@@ -44,9 +44,11 @@ public class Rol {
 
     public Rol(String id_role) {
         this.id_role = id_role;
+        this.userRoles = new ArrayList<>();
     }
 
     public Rol() {
+        this.userRoles = new ArrayList<>();
     }
 
     public String getId_role() {
