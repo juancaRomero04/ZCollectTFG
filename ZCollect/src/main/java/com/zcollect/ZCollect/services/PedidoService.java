@@ -195,4 +195,8 @@ public class PedidoService {
         );
     }
 
+    public List<Pedido> obtenerPedidosPorUsuarioId(String idUsuario) {
+        return pedidoRepository.findByUsuarioId_user(idUsuario);
+    }
+
 }

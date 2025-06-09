@@ -1,0 +1,132 @@
+/* Contenedor principal del perfil */
+.perfil-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+/* Cabecera */
+.perfil-header {
+  text-align: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.perfil-header h2 {
+  font-size: 2rem;
+  margin: 0;
+  color: #34495e;
+}
+
+/* Campo individual */
+.perfil-info {
+  margin: 1rem 0;
+  font-size: 1.05rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.perfil-info strong {
+  color: #555;
+  min-width: 150px;
+}
+
+/* Evitar que el texto se salga del contenedor */
+.perfil-info span {
+  flex-shrink: 1;       /* Permite que el texto se reduzca dentro del flex */
+  min-width: 0;         /* Permite que flex-shrink funcione correctamente */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* Dirección destacada */
+.perfil-direccion {
+  background-color: #ecf5ff;
+  border-left: 5px solid #3498db;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #2d3436;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  display: inline-block;
+  /* Opcional: si quieres scroll horizontal en caso extremo */
+  /* overflow-x: auto; */
+  /* white-space: nowrap; */
+}
+
+/* Sección pedidos */
+.pedidos-section {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #ddd;
+}
+
+.pedidos-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.pedidos-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.pedidos-section li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .perfil-container {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .perfil-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .perfil-info strong {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-container {
+    padding: 1rem;
+  }
+
+  .perfil-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .perfil-info {
+    font-size: 1rem;
+  }
+}

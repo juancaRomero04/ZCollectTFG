@@ -130,5 +130,8 @@ export class PerfilComponent implements OnInit, OnDestroy {
   irAGestionUsuarios(): void {
     this.router.navigate(['/admin/usuarios']);
   }
+  irAPerfil(): void {
+    this.router.navigate(['/perfil/completo']);
+  }
 
 }

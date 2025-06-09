@@ -99,4 +99,10 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/pedidos")
+    public ResponseEntity<?> obtenerPedidosDeUsuario(@PathVariable String id) {
+        List<Pedido> pedidos = pedidoService.obtenerPedidosPorUsuarioId(id);
+        return ResponseEntity.ok(pedidos);
+    }
+
 }

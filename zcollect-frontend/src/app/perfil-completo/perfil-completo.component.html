@@ -1,0 +1,28 @@
+<div *ngIf="usuario; else sinUsuario" class="perfil-container">
+  <div class="perfil-header">
+    <h2>Perfil de Usuario</h2>
+  </div>
+
+  <div class="perfil-info"><strong>Nombre de usuario:</strong> <span>{{ usuario.username }}</span></div>
+  <div class="perfil-info"><strong>Email:</strong> <span>{{ usuario.email }}</span></div>
+  <div class="perfil-info"><strong>Teléfono:</strong> <span>{{ usuario.telefono }}</span></div>
+
+  <div class="perfil-direccion">
+    Dirección de envío: {{ usuario.direccion }}
+  </div>
+
+  <div *ngIf="pedidos.length > 0" class="pedidos-section">
+    <h3>Pedidos Realizados</h3>
+    <ul>
+      <li *ngFor="let pedido of pedidos">
+        <strong>{{ pedido.fecha_ped | date }}</strong>:
+        Estado - {{ pedido.estado }},
+        Total - {{ pedido.total | currency:'USD' }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #sinUsuario>
+  <p>No hay usuario logueado.</p>
+</ng-template>

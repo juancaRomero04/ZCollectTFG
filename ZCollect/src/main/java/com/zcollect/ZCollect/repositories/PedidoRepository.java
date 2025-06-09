@@ -7,6 +7,7 @@ package com.zcollect.ZCollect.repositories;
 import com.zcollect.ZCollect.entitites.Pedido;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -14,5 +15,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PedidoRepository extends JpaRepository<Pedido, String>{
     List<Pedido> findByUsuarioUsername(String username);
+    
+    @Query("SELECT p FROM Pedido p WHERE p.usuario.id_user = :idUser")
+    List<Pedido> findByUsuarioId_user(String idUser);
 
 }

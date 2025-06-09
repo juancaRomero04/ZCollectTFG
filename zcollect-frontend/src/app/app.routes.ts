@@ -12,6 +12,7 @@ import { authGuard } from './guards/auth.guard';
 import { AdminProductoComponent } from './admin-producto/admin-producto.component';
 import { AdminGestionUsuariosComponent } from './admin-gestion-usuarios/admin-gestion-usuarios.component';
 import { AdminEditarUsuariosComponent } from './admin-editar-usuarios/admin-editar-usuarios.component';
+import { PerfilCompletoComponent } from './perfil-completo/perfil-completo.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent},
@@ -25,7 +26,8 @@ export const routes: Routes = [
     { path: 'admin/producto', component: AdminProductoComponent },             // Nuevo
     { path: 'admin/producto/:id', component: AdminProductoComponent },         // Editar
     { path: 'admin/usuarios', component: AdminGestionUsuariosComponent },
-    { path: 'admin/usuarios/editar/:id', component: AdminEditarUsuariosComponent }
+    { path: 'admin/usuarios/editar/:id', component: AdminEditarUsuariosComponent },
+    { path: 'perfil/completo', component: PerfilCompletoComponent }
 
 
 ];
