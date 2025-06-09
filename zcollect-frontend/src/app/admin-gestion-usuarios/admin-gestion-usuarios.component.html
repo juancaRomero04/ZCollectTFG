@@ -1,21 +1,21 @@
-<h2>Gestión de Usuarios</h2>
-<table>
+<div class="titulo-formulario">
+  <h2>Gestión de Usuarios</h2>
+</div>
+<table class="tabla-usuarios">
   <thead>
     <tr>
       <th>Nombre</th>
       <th>Email</th>
-      <th>Rol</th>
       <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let u of usuarios">
-      <td>{{ u.username }}</td>
-      <td>{{ u.email }}</td>
-      <td>{{ u.rol }}</td>
-      <td>
-        <button (click)="editarUsuario(u.id_user)">Editar</button>
-        <button (click)="eliminarUsuario(u.id_user)">Eliminar</button>
+      <td data-label="Nombre">{{ u.username }}</td>
+      <td data-label="Email">{{ u.email }}</td>
+      <td data-label="Acciones">
+        <button class="btn-editar" (click)="editarUsuario(u.id_user)">Editar</button>
+        <button class="btn-eliminar" (click)="eliminarUsuario(u.id_user)">Eliminar</button>
       </td>
     </tr>
   </tbody>

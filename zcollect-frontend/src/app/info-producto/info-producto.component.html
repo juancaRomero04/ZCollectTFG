@@ -1,3 +1,7 @@
+<div *ngIf="mensajeToast" class="toast-flotante">
+  {{ mensajeToast }}
+</div>
+
 <div *ngIf="producto" class="producto-detalle">
   <div class="detalle-img-wrapper">
     <img [src]="producto.img_url" alt="{{ producto.nombre }}" class="detalle-img" />

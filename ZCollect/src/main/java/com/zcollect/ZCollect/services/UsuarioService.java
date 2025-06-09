@@ -60,16 +60,10 @@ public class UsuarioService {
             throw new RuntimeException("El correo ya está registrado");
         }
 
-        long totalUsuarios = usuarioRepository.count();
-        String nuevoId = "user-" + (totalUsuarios + 1);
-        while (usuarioRepository.existsById(nuevoId)) {
-            totalUsuarios++;
-            nuevoId = "user-" + (totalUsuarios + 1);
-        }
-
-        nuevoUsuario.setId_user(nuevoId);
+        nuevoUsuario.setId_user(generarNuevoIdUsuario());
         nuevoUsuario.setPassword(passwordEncoder.encode(nuevoUsuario.getPassword()));
         nuevoUsuario.setFecha_registro(Date.valueOf(LocalDate.now()));
+
         return usuarioRepository.save(nuevoUsuario);
     }
 
@@ -96,6 +90,25 @@ public class UsuarioService {
         }
 
         return usuarioRepository.save(existente);
+    }
+
+    private String generarNuevoIdUsuario() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        int max = 0;
+
+        for (Usuario u : usuarios) {
+            String id = u.getId_user();
+            if (id != null && id.startsWith("user-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(5));
+                    if (num > max) max = num;
+                } catch (NumberFormatException e) {
+                    // ignorar
+                }
+            }
+        }
+
+        return "user-" + (max + 1);
     }
 
 }

@@ -9,7 +9,7 @@
     </p>
     <p>{{ res.comentario }}</p>
 
-    <!-- ✅ Botón solo visible para admins -->
+    
     <button *ngIf="isAdmin" (click)="eliminarResena(res.idRes)"
       style="color: red; background-color: transparent; border: none; cursor: pointer;">
       Eliminar reseña

@@ -1,3 +1,6 @@
+<div *ngIf="mensajeToast" class="toast-flotante">
+  {{ mensajeToast }}
+</div>
 <div class="perfil-layout">
   <!-- Columna izquierda (Perfil) -->
   <div class="perfil-col">
@@ -45,8 +48,6 @@
     </div>
   </div>
 
-  <!-- Mensaje flotante -->
-  <div *ngIf="mostrarMensaje" class="mensaje-flotante">
-    Sesión cerrada correctamente
-  </div>
+
+
 </div>

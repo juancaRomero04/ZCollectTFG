@@ -24,6 +24,8 @@ export class AdminProductoComponent implements OnInit {
   categorias: Categoria[] = [];
   esNuevo = true;
 
+  mensajeToast: string | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
@@ -42,40 +44,47 @@ export class AdminProductoComponent implements OnInit {
   }
 
   validarUrlImagen(url: string): boolean {
-    // Expresión regular para validar extensiones comunes de imágenes
     const pattern = /\.(jpeg|jpg|gif|png|bmp|webp)$/i;
     return pattern.test(url);
   }
+
+  mostrarToast(mensaje: string) {
+    this.mensajeToast = mensaje;
+    setTimeout(() => {
+      this.mensajeToast = null;
+    }, 3000);
+  }
+
   guardar() {
     if (!this.producto.nombre || !this.producto.precio || !this.producto.categoria.id_cat) {
-      alert('Completa los campos obligatorios');
+      this.mostrarToast('Completa los campos obligatorios');
       return;
     }
 
     if (this.producto.precio <= 0) {
-      alert('El precio debe ser mayor que 0');
+      this.mostrarToast('El precio debe ser mayor que 0');
       return;
     }
 
     if (this.producto.stock < 0) {
-      alert('El stock no puede ser negativo');
+      this.mostrarToast('El stock no puede ser negativo');
       return;
     }
 
     if (this.producto.img_url && !this.validarUrlImagen(this.producto.img_url)) {
-      alert('La URL de la imagen no es válida. Debe terminar en .jpg, .jpeg, .png, .gif, .bmp o .webp');
+      this.mostrarToast('La URL de la imagen no es válida. Debe terminar en .jpg, .jpeg, .png, .gif, .bmp o .webp');
       return;
     }
 
     if (this.esNuevo) {
       this.productoService.crearProducto(this.producto).then(() => {
-        alert('Producto creado');
-        this.router.navigate(['/catalogo']);
+        this.mostrarToast('Producto creado');
+        setTimeout(() => this.router.navigate(['/catalogo']), 1000);
       });
     } else {
       this.productoService.actualizarProducto(this.producto).then(() => {
-        alert('Producto actualizado');
-        this.router.navigate(['/catalogo']);
+        this.mostrarToast('Producto actualizado');
+        setTimeout(() => this.router.navigate(['/catalogo']), 1000);
       });
     }
   }

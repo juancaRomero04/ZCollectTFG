@@ -1,8 +1,7 @@
-<!-- Cabecera con filtros y búsqueda -->
 <div class="catalogo-header">
   <div class="filtros">
-    <label for="filtro">Ordenar por:</label>
-    <select id="filtro" [(ngModel)]="criterioOrden" (change)="ordenarProductos()">
+    <label for="orden">Ordenar por:</label>
+    <select id="orden" [(ngModel)]="criterioOrden" (change)="ordenarProductos()">
       <option value="">-- Seleccionar --</option>
       <option value="precio_asc">Precio (menor a mayor)</option>
       <option value="precio_desc">Precio (mayor a menor)</option>
@@ -13,13 +12,50 @@
     </select>
   </div>
 
-  <input type="text" class="busqueda-productos" placeholder="Buscar productos..." [(ngModel)]="textoBusqueda"
-    (input)="filtrarProductos()" />
+  <div class="filtros">
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()">
+      <option value="">Todas</option>
+      <option *ngFor="let cat of categorias" [value]="cat.id_cat">{{ cat.nombre }}</option>
+    </select>
+  </div>
+
+  <div class="filtros filtro-precio">
+    <label>Precio entre:</label>
+    <div class="slider-container">
+      <label>Min: {{ precioMin.toFixed(2) }} €</label>
+      <input
+        type="range"
+        [(ngModel)]="precioMin"
+        [min]="precioMinAbsoluto"
+        [max]="precioMax"
+        step="0.01"
+        (input)="aplicarFiltros()"
+      />
+
+      <label>Max: {{ precioMax.toFixed(2) }} €</label>
+      <input
+        type="range"
+        [(ngModel)]="precioMax"
+        [min]="precioMin"
+        [max]="precioMaxAbsoluto"
+        step="0.01"
+        (input)="aplicarFiltros()"
+      />
+    </div>
+  </div>
+
+  <input
+    type="text"
+    class="busqueda-productos"
+    placeholder="Buscar productos..."
+    [(ngModel)]="textoBusqueda"
+    (input)="aplicarFiltros()"
+  />
 </div>
+
 <button *ngIf="esAdmin" class="btn-anadir" (click)="anadirProducto()">Añadir nuevo producto</button>
 
-
-<!-- Contenedor principal del catálogo -->
 <div class="catalogo-container">
   <div *ngFor="let item of categoriasConProductos" class="categoria-block">
     <h2 class="categoria-nombre">{{ item.categoria.nombre }}</h2>
@@ -48,8 +84,7 @@
     </div>
   </div>
 
-  <!-- Mensaje cuando no hay productos en ninguna categoría -->
   <p *ngIf="categoriasConProductos.length === 0" class="no-resultados">
-    No se encontraron productos que coincidan con tu búsqueda.
+    No se encontraron productos que coincidan con tu búsqueda o filtros.
   </p>
 </div>

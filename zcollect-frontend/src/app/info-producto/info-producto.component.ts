@@ -14,6 +14,7 @@ import { NgFor } from '@angular/common';
 })
 export class InfoProductoComponent implements OnInit {
   producto: Producto | null = null;
+  mensajeToast: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,16 +36,26 @@ export class InfoProductoComponent implements OnInit {
       if (this.producto) {
         const usuarioId = this.getUsuarioId();
         await this.carritoService.agregarProducto(usuarioId, this.producto.id_producto, 1);
-        alert(`Producto "${this.producto.nombre}" añadido al carrito.`);
+
+        this.mostrarToast(`Producto "${this.producto.nombre}" añadido al carrito.`);
+
         await this.carritoService.cargarCarrito(usuarioId);
+
         setTimeout(() => {
           this.router2.navigate(['/catalogo']);
         }, 750);
       }
     } catch (err) {
       console.error('Error al añadir al carrito', err);
-      alert('No se pudo añadir el producto al carrito. Intenta de nuevo.');
+      this.mostrarToast('No se pudo añadir el producto al carrito. Intenta de nuevo.');
     }
+  }
+
+  mostrarToast(mensaje: string) {
+    this.mensajeToast = mensaje;
+    setTimeout(() => {
+      this.mensajeToast = null;
+    }, 3000); // desaparece después de 3 segundos
   }
 
   private getUsuarioId(): string {

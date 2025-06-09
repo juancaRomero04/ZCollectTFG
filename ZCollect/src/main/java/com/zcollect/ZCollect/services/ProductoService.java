@@ -31,16 +31,7 @@ public class ProductoService {
 
     public Producto saveProducto(Producto producto) {
         if (producto.getId_producto() == null || producto.getId_producto().isEmpty()) {
-            long totalProductos = productoRepository.count();
-            String nuevoId = "prod-" + (totalProductos + 1);
-
-            // Verifica si ya existe ese ID (por si hubo eliminaciones)
-            while (productoRepository.existsById(nuevoId)) {
-                totalProductos++;
-                nuevoId = "prod-" + (totalProductos + 1);
-            }
-
-            producto.setId_producto(nuevoId);
+            producto.setId_producto(generarNuevoIdProducto());
         }
 
         return productoRepository.save(producto);
@@ -52,5 +43,24 @@ public class ProductoService {
 
     public List<Producto> findByCategoriaId(String id) {
         return productoRepository.findByCategoria(id);
+    }
+
+    private String generarNuevoIdProducto() {
+        List<Producto> productos = productoRepository.findAll();
+        int max = 0;
+
+        for (Producto p : productos) {
+            String id = p.getId_producto();
+            if (id != null && id.startsWith("prod-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(5));
+                    if (num > max) max = num;
+                } catch (NumberFormatException e) {
+                    // ignorar
+                }
+            }
+        }
+
+        return "prod-" + (max + 1);
     }
 }

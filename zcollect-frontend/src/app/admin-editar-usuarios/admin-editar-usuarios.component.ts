@@ -14,6 +14,7 @@ import { NgIf } from '@angular/common';
 export class AdminEditarUsuariosComponent implements OnInit {
   form: FormGroup;
   usuarioId: string = '';
+  mensajeToast: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,51 +41,54 @@ export class AdminEditarUsuariosComponent implements OnInit {
       password: ['', [
         Validators.minLength(8),
         Validators.maxLength(255)
-      ]] // No required porque es opcional
+      ]]
     });
-
   }
 
   async ngOnInit() {
     this.usuarioId = this.route.snapshot.paramMap.get('id')!;
     try {
       const usuario = await this.usuarioService.obtenerUsuarioPorId(this.usuarioId);
-      console.log('Usuario recibido:', usuario);
-
       this.form.patchValue({
         username: usuario.username || '',
         email: usuario.email || '',
         telefono: usuario.telefono || '',
         direccion: usuario.direccion || '',
-        password: '' // No mostrar password por seguridad
+        password: ''
       });
     } catch (error: any) {
-      alert(error.message);
+      this.mostrarToast('Error al cargar usuario: ' + error.message);
     }
+  }
+
+  mostrarToast(mensaje: string): void {
+    this.mensajeToast = mensaje;
+    setTimeout(() => {
+      this.mensajeToast = null;
+    }, 3000);
   }
 
   async guardar() {
     if (this.form.invalid) {
-      alert('Por favor, completa los campos requeridos.');
+      this.mostrarToast('Por favor, completa los campos requeridos.');
       return;
     }
 
     try {
       const formValue = this.form.value;
-
       const usuarioActualizado = {
         username: formValue.username,
         email: formValue.email,
         telefono: formValue.telefono,
         direccion: formValue.direccion,
-        password: formValue.password && formValue.password.trim() !== '' ? formValue.password : undefined
+        password: formValue.password?.trim() !== '' ? formValue.password : undefined
       };
 
       await this.usuarioService.actualizarUsuario(this.usuarioId, usuarioActualizado);
-      alert('Usuario actualizado correctamente');
-      this.router.navigate(['/admin/usuarios']);
+      this.mostrarToast('Usuario actualizado correctamente');
+      setTimeout(() => this.router.navigate(['/admin/usuarios']), 2000);
     } catch (error: any) {
-      alert(error.message);
+      this.mostrarToast('Error al actualizar: ' + error.message);
     }
   }
 

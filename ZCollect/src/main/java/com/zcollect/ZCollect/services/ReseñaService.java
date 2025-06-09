@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ReseñaService {
+
     @Autowired
     private ReseñaRepository reseñaRepository;
 
@@ -43,18 +44,18 @@ public class ReseñaService {
         return reseñaRepository.findByProductoId(productoId)
                 .stream()
                 .map(r -> new ReseñaDTO(
-                        r.getId_res(),
-                        r.getComentario(),
-                        r.getCalificacion(),
-                        r.getFecha_rese(),
-                        r.getUsuario().getUsername(),
-                        r.getUsuario().getEmail()
-                ))
+                r.getId_res(),
+                r.getComentario(),
+                r.getCalificacion(),
+                r.getFecha_rese(),
+                r.getUsuario().getUsername(),
+                r.getUsuario().getEmail()
+        ))
                 .collect(Collectors.toList());
     }
 
     public Reseña guardarReseña(Reseña reseña) {
-        reseña.setId_res(generarIdUnico());
+        reseña.setId_res(generarNuevoIdReseña());
         return reseñaRepository.save(reseña);
     }
 
@@ -62,21 +63,25 @@ public class ReseñaService {
         reseñaRepository.deleteById(id);
     }
 
-    private String generarIdUnico() {
-        List<Reseña> todas = reseñaRepository.findAll();
+    private String generarNuevoIdReseña() {
+        List<Reseña> reseñas = reseñaRepository.findAll();
         int max = 0;
 
-        for (Reseña r : todas) {
-            if (r.getId_res() != null && r.getId_res().startsWith("res-")) {
+        for (Reseña r : reseñas) {
+            String id = r.getId_res();
+            if (id != null && id.startsWith("res-")) {
                 try {
-                    int num = Integer.parseInt(r.getId_res().substring(4));
-                    if (num > max) max = num;
+                    int num = Integer.parseInt(id.substring(4));
+                    if (num > max) {
+                        max = num;
+                    }
                 } catch (NumberFormatException e) {
-                    // ignorar ids no válidas
+                    // ignorar
                 }
             }
         }
 
         return "res-" + (max + 1);
     }
+
 }

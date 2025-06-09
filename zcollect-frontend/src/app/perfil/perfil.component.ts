@@ -14,7 +14,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class PerfilComponent implements OnInit, OnDestroy {
   usuario: any;
-  mostrarMensaje = false;
+  mensajeToast: string | null = null;
 
   carritoItems: CarritoProducto[] = [];
   carritoSub?: Subscription;
@@ -40,6 +40,13 @@ export class PerfilComponent implements OnInit, OnDestroy {
     this.carritoSub?.unsubscribe();
   }
 
+  mostrarToast(mensaje: string): void {
+    this.mensajeToast = mensaje;
+    setTimeout(() => {
+      this.mensajeToast = null;
+    }, 3000);
+  }
+
   getTotal(): number {
     return this.carritoItems.reduce(
       (total, item) => total + (item.producto.precio * item.cantidadProd),
@@ -49,30 +56,29 @@ export class PerfilComponent implements OnInit, OnDestroy {
 
   cerrarSesion(): void {
     this.authService.logout();
-    this.mostrarMensaje = true;
+    this.mostrarToast('Sesión cerrada correctamente');
     setTimeout(() => this.router.navigate(['/login']), 2000);
   }
 
   eliminarUsuario(): void {
     if (!this.usuario?.id) {
-      alert('No se pudo determinar el ID del usuario para eliminar.');
+      this.mostrarToast('No se pudo determinar el ID del usuario para eliminar.');
       return;
     }
 
     if (confirm('¿Estás seguro de que quieres eliminar tu usuario? Esta acción no se puede deshacer.')) {
       this.authService.eliminarUsuario(this.usuario.id).then(response => {
-        alert(response.mensaje);
-        this.mostrarMensaje = true;
+        this.mostrarToast(response.mensaje);
         setTimeout(() => this.cerrarSesion(), 2000);
       }).catch(error => {
-        alert('Error al eliminar el usuario: ' + error.message);
+        this.mostrarToast('Error al eliminar el usuario: ' + error.message);
       });
     }
   }
 
   async actualizarCantidadProducto(idProducto: string, nuevaCantidad: number) {
     if (!this.usuario?.id) {
-      alert('Usuario no identificado');
+      this.mostrarToast('Usuario no identificado');
       return;
     }
 
@@ -80,20 +86,21 @@ export class PerfilComponent implements OnInit, OnDestroy {
       const carritoActualizado = await this.carritoService.actualizarCantidad(this.usuario.id, idProducto, nuevaCantidad);
       this.carritoItems = carritoActualizado.productos;
     } catch (error: any) {
-      alert('Error al actualizar la cantidad: ' + error.message);
+      this.mostrarToast('Error al actualizar la cantidad: ' + error.message);
     }
   }
 
   async eliminarProductoDelCarrito(idProducto: string) {
     if (!this.usuario?.id) {
-      alert('Usuario no identificado');
+      this.mostrarToast('Usuario no identificado');
       return;
     }
+
     try {
       const carritoActualizado = await this.carritoService.eliminarProducto(this.usuario.id, idProducto);
       this.carritoItems = carritoActualizado.productos;
     } catch (error: any) {
-      alert('Error al eliminar el producto: ' + error.message);
+      this.mostrarToast('Error al eliminar el producto: ' + error.message);
     }
   }
 
@@ -102,7 +109,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
     if (!item) return;
 
     if (nuevaCantidad > item.producto.stock) {
-      alert(`No hay suficiente stock. Stock disponible: ${item.producto.stock}`);
+      this.mostrarToast(`No hay suficiente stock. Stock disponible: ${item.producto.stock}`);
       return;
     }
 
@@ -116,9 +123,10 @@ export class PerfilComponent implements OnInit, OnDestroy {
     this.actualizarCantidadProducto(idProducto, nuevaCantidad);
   }
 
-  irAFormularioCompra() {
+  irAFormularioCompra(): void {
     this.router.navigate(['/formulario-compra']);
   }
+
   irAGestionUsuarios(): void {
     this.router.navigate(['/admin/usuarios']);
   }

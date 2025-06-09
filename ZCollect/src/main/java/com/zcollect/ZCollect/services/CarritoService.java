@@ -14,6 +14,7 @@ import com.zcollect.ZCollect.repositories.CarritoRepository;
 import com.zcollect.ZCollect.repositories.ProductoRepository;
 import com.zcollect.ZCollect.repositories.UsuarioRepository;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,21 +39,25 @@ public class CarritoService {
     @Autowired
     private CarritoProductoRepository carritoProductoRepository;
 
-    // Método para generar el ID con formato cart-<número>
     private String generarNuevoIdCarrito() {
-        Optional<Carrito> ultimoCarritoOpt = carritoRepository.findTopByOrderByIdCarritoDesc();
-        int nuevoNumero = 1;
-        if (ultimoCarritoOpt.isPresent()) {
-            String ultimoId = ultimoCarritoOpt.get().getId_carrito();
-            try {
-                String numeroStr = ultimoId.replace("cart-", "");
-                nuevoNumero = Integer.parseInt(numeroStr) + 1;
-            } catch (NumberFormatException e) {
-                // Si el formato no es el esperado, reiniciamos a 1
-                nuevoNumero = 1;
+        List<Carrito> carritos = carritoRepository.findAll();
+        int max = 0;
+
+        for (Carrito c : carritos) {
+            String id = c.getId_carrito();
+            if (id != null && id.startsWith("cart-")) {
+                try {
+                    int num = Integer.parseInt(id.substring(5));
+                    if (num > max) {
+                        max = num;
+                    }
+                } catch (NumberFormatException e) {
+                    // ignorar
+                }
             }
         }
-        return "cart-" + nuevoNumero;
+
+        return "cart-" + (max + 1);
     }
 
     public Optional<Carrito> getCarritoById(String id) {
