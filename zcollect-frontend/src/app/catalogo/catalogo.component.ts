@@ -68,7 +68,7 @@ export class CatalogoComponent implements OnInit {
     const coincidePrecioMin = p.precio >= this.precioMin;
     const coincidePrecioMax = p.precio <= this.precioMax;
 
-    // NUEVO: mostrar solo productos con stock > 0 si NO es admin
+    //mostrar solo productos con stock > 0 si NO es admin
     const coincideStock = this.esAdmin ? true : (p.stock > 0);
 
     return coincideCategoria && coincideBusqueda && coincidePrecioMin && coincidePrecioMax && coincideStock;

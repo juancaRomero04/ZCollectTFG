@@ -82,13 +82,13 @@ public class UsuarioController {
 
             usuarioService.saveUsuario(registrado);
 
-            return ResponseEntity.ok(new UsuarioResponseDTO(registrado)); // SOLO devuelve DTO
+            return ResponseEntity.ok(new UsuarioResponseDTO(registrado)); 
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
 
-    // Ver todos los usuarios (solo admin debería poder)
+    // Ver todos los usuarios
     @GetMapping
     public List<Usuario> listarUsuarios() {
         return usuarioService.getAllUsuarios();

@@ -20,14 +20,14 @@ export const routes: Routes = [
     { path: 'perfil', component: PerfilComponent, canActivate: [authGuard]},
     { path: 'info', component: InfoComponent},
     { path: 'catalogo', component: CatalogoComponent},
-    { path: 'producto/:id', component: InfoProductoComponent },
+    { path: 'producto/:id', component: InfoProductoComponent, canActivate: [authGuard]  },
     { path: 'formulario-compra', component: FormularioCompraComponent, canActivate: [authGuard] },
     { path: 'comentarios/:id', component: ResenaProductoComponent, canActivate: [authGuard] },
-    { path: 'admin/producto', component: AdminProductoComponent },             // Nuevo
-    { path: 'admin/producto/:id', component: AdminProductoComponent },         // Editar
-    { path: 'admin/usuarios', component: AdminGestionUsuariosComponent },
-    { path: 'admin/usuarios/editar/:id', component: AdminEditarUsuariosComponent },
-    { path: 'perfil/completo', component: PerfilCompletoComponent }
+    { path: 'admin/producto', component: AdminProductoComponent, canActivate: [authGuard]  },            
+    { path: 'admin/producto/:id', component: AdminProductoComponent, canActivate: [authGuard]  },        
+    { path: 'admin/usuarios', component: AdminGestionUsuariosComponent, canActivate: [authGuard]  },
+    { path: 'admin/usuarios/editar/:id', component: AdminEditarUsuariosComponent, canActivate: [authGuard]  },
+    { path: 'perfil/completo', component: PerfilCompletoComponent, canActivate: [authGuard]  }
 
 
 ];

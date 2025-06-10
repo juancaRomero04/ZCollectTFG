@@ -96,7 +96,6 @@ public class CarritoController {
             Carrito carritoActualizado = carritoService.actualizarCantidadProducto(idUsuario, idProducto, cantidad);
             return ResponseEntity.ok(carritoActualizado);
         } catch (RuntimeException e) {
-            // Puedes personalizar el manejo de errores
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }

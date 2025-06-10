@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ResenaService {
 
-  private baseUrl = 'http://localhost:8080/reseñas'; // Ajustar si cambia el backend
+  private baseUrl = 'http://localhost:8080/reseñas'; 
 
   // Obtener reseñas por ID de producto
   async obtenerResenasPorProducto(productoId: string) {

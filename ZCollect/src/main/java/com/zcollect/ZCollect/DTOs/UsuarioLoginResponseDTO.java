@@ -16,7 +16,7 @@ public class UsuarioLoginResponseDTO {
     private String id;
     private String username;
     private String email;
-    private List<String> roles;  // <-- nueva propiedad
+    private List<String> roles;  
 
     public UsuarioLoginResponseDTO(Usuario usuario) {
         this.id = usuario.getId_user();

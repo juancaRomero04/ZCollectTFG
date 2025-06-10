@@ -34,7 +34,6 @@ public class PedidoDTO {
         this.productos = productos;
     }
 
-    // getters y setters
     public String getId_pedido() {
         return id_pedido;
     }

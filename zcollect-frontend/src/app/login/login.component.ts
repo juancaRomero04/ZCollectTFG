@@ -31,7 +31,6 @@ export class LoginComponent {
   onSubmit(): void {
     this.authService.login(this.loginForm.value)
       .then(res => {
-        console.log('Login exitoso', res);
         this.errorMessage = '';
         this.successMessage = '¡Inicio de sesión exitoso! Redirigiendo...';
 

@@ -14,7 +14,7 @@
         GESTIONAR USUARIOS
       </button>
       <button class="gestionar" (click)="irAPerfil()">
-        PERFIL COMPLETO
+        DATOS DEL USUARIO
       </button>
 
     </div>
@@ -22,7 +22,6 @@
 
   <!-- Columna derecha (Contenido) -->
   <div class="perfil-body">
-    <!-- Contenedor para que el footer quede fijo -->
     <div class="carrito-lista">
       <div *ngFor="let item of carritoItems" class="carrito-item">
         <img class="carrito-img" [src]="item.producto.img_url" alt="{{item.producto.nombre}}" />

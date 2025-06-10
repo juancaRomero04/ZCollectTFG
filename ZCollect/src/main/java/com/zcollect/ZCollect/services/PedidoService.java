@@ -81,7 +81,6 @@ public class PedidoService {
         for (CarritoProducto cp : productosEnCarrito) {
             Producto p = cp.getProducto();
 
-            // Verificar y restar stock
             if (p.getStock() < cp.getCantidadProd()) {
                 throw new IllegalStateException("Stock insuficiente para el producto: " + p.getNombre());
             }

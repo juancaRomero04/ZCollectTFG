@@ -29,19 +29,19 @@ public class ReseñaController {
     @Autowired
     private ReseñaService reseñaService;
 
-    // ✅ Retorna DTOs con info del usuario para un producto
+    //Retorna DTOs con info del usuario para un producto
     @GetMapping("/producto/{productoId}")
     public List<ReseñaDTO> obtenerDTOsPorProducto(@PathVariable String productoId) {
         return reseñaService.obtenerDTOsPorProducto(productoId);
     }
 
-    // ✅ Crear una nueva reseña
+    //Crear una nueva reseña
     @PostMapping
     public Reseña crearReseña(@RequestBody Reseña reseña) {
         return reseñaService.guardarReseña(reseña);
     }
 
-    // ✅ Eliminar una reseña por ID
+    //Eliminar una reseña por ID
     @DeleteMapping("/{id}")
     public void eliminarReseña(@PathVariable String id) {
         reseñaService.eliminarReseña(id);

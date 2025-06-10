@@ -50,7 +50,7 @@ public class Pedido {
     private BigDecimal total;
 
     @Lob
-    private String factura; // Almacenarás JSON como String (puedes usar conversión si quieres Map)
+    private String factura; // Almacenarás JSON como String
 
     // Relaciones
     @ManyToOne

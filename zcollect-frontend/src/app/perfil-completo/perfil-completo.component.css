@@ -53,7 +53,7 @@
   display: inline-block;
 }
 
-/* Dirección destacada */
+
 .perfil-direccion {
   background-color: #ecf5ff;
   border-left: 5px solid #3498db;
@@ -67,9 +67,6 @@
   word-break: break-word;
   max-width: 100%;
   display: inline-block;
-  /* Opcional: si quieres scroll horizontal en caso extremo */
-  /* overflow-x: auto; */
-  /* white-space: nowrap; */
 }
 
 /* Sección pedidos */

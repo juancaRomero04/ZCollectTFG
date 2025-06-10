@@ -39,7 +39,7 @@
   background: #fff;
   border-radius: 0.75rem;
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-  width: 100%; /* Ahora es 100% del wrapper */
+  width: 100%;
   min-height: 21rem;
   padding: 1rem;
   display: flex;

@@ -85,7 +85,6 @@ public class CarritoService {
             nuevoCarrito.setId_carrito(generarNuevoIdCarrito());
             nuevoCarrito.setFechaC(new Date());
             nuevoCarrito.setUsuario(usuario);
-            // No hacemos usuario.setCarrito(nuevoCarrito); para evitar conflictos en la sesión
             return carritoRepository.save(nuevoCarrito);
         }
     }
@@ -103,7 +102,6 @@ public class CarritoService {
                     nuevoCarrito.setId_carrito(generarNuevoIdCarrito());
                     nuevoCarrito.setFechaC(new Date());
                     nuevoCarrito.setUsuario(usuario);
-                    // No hacer usuario.setCarrito(nuevoCarrito);
                     return carritoRepository.save(nuevoCarrito);
                 });
 

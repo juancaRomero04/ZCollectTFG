@@ -30,7 +30,7 @@ export class ProductoService {
       credentials: 'include'
     }).then(res => {
       if (!res.ok) throw new Error('Error al eliminar');
-      return res.json(); // ahora sí hay JSON
+      return res.json(); 
     });
   }
 

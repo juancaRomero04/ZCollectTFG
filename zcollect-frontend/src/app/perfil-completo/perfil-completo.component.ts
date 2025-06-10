@@ -22,9 +22,7 @@ export class PerfilCompletoComponent implements OnInit {
 
   ngOnInit(): void {
     const usuarioGuardado = this.authService.getUsuario();
-    console.log('Usuario guardado en localStorage:', usuarioGuardado);
     if (usuarioGuardado?.id) {
-      console.log('ID usuario para cargar datos:', usuarioGuardado.id);
       this.cargarUsuario(usuarioGuardado.id);
       this.cargarPedidos(usuarioGuardado.id);
     } else {
@@ -34,14 +32,12 @@ export class PerfilCompletoComponent implements OnInit {
   }
 
   cargarUsuario(idUsuario: string): void {
-    console.log(`Intentando cargar usuario con ID: ${idUsuario}`);
     fetch(`http://localhost:8080/usuarios/${idUsuario}`, {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => {
-        console.log('Respuesta fetch usuario:', res);
         if (!res.ok) {
           console.error(`Error HTTP al obtener usuario: ${res.status} ${res.statusText}`);
           throw new Error('Error al obtener el usuario');
@@ -49,7 +45,6 @@ export class PerfilCompletoComponent implements OnInit {
         return res.json();
       })
       .then(data => {
-        console.log('Datos usuario recibidos:', data);
         this.usuario = data;
       })
       .catch(err => {
@@ -59,14 +54,12 @@ export class PerfilCompletoComponent implements OnInit {
   }
 
   cargarPedidos(idUsuario: string): void {
-    console.log(`Intentando cargar pedidos para usuario ID: ${idUsuario}`);
     fetch(`http://localhost:8080/pedidos/${idUsuario}/pedidos`, {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => {
-        console.log('Respuesta fetch pedidos:', res);
         if (!res.ok) {
           console.error(`Error HTTP al obtener pedidos: ${res.status} ${res.statusText}`);
           throw new Error('Error al obtener pedidos');
@@ -74,7 +67,6 @@ export class PerfilCompletoComponent implements OnInit {
         return res.json();
       })
       .then(data => {
-        console.log('Pedidos recibidos:', data);
         this.pedidos = data;
       })
       .catch(err => {

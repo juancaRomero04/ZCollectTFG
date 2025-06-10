@@ -39,7 +39,7 @@ public class ReseñaService {
         return reseñaRepository.findByProductoId(productoId);
     }
 
-    // ✅ Método que retorna las reseñas como DTO con info del usuario
+    //Método que retorna las reseñas como DTO con info del usuario
     public List<ReseñaDTO> obtenerDTOsPorProducto(String productoId) {
         return reseñaRepository.findByProductoId(productoId)
                 .stream()

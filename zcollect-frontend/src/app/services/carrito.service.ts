@@ -27,18 +27,15 @@ export class CarritoService {
 
   async obtenerCarritoPorUsuario(idUsuario: string): Promise<Carrito> {
     try {
-      console.log(`Obteniendo carrito para usuario: ${idUsuario}`);
       const res = await fetch(`${this.apiUrl}/usuario/${idUsuario}`, {
         credentials: 'include'
       });
-      console.log('Respuesta obtenerCarritoPorUsuario status:', res.status);
       if (!res.ok) {
         const errorText = await res.text();
         console.error('Error obtenerCarritoPorUsuario:', errorText);
         throw new Error(errorText || 'Error al obtener el carrito');
       }
       const carrito = await res.json();
-      console.log('Carrito obtenido:', carrito);
       return carrito;
     } catch (error) {
       console.error('Error en obtenerCarritoPorUsuario:', error);
@@ -48,10 +45,8 @@ export class CarritoService {
 
   async cargarCarrito(idUsuario: string): Promise<void> {
     try {
-      console.log('Cargando carrito para usuario:', idUsuario);
       const carrito = await this.obtenerCarritoPorUsuario(idUsuario);
       this.cartItemsSubject.next(carrito.productos);
-      console.log('Carrito cargado en BehaviorSubject:', carrito.productos);
     } catch (error) {
       console.error('Error cargando carrito:', error);
     }
@@ -60,14 +55,12 @@ export class CarritoService {
   async agregarProducto(idUsuario: string, idProducto: string, cantidad: number): Promise<Carrito> {
     try {
       const url = `${this.apiUrl}/usuario/${idUsuario}/agregar?idProducto=${idProducto}&cantidad=${cantidad}`;
-      console.log('Llamando a URL agregarProducto:', url);
 
       const res = await fetch(url, {
         method: 'POST',
         credentials: 'include'
       });
 
-      console.log('Respuesta agregarProducto status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -76,7 +69,6 @@ export class CarritoService {
       }
 
       const carrito: Carrito = await res.json();
-      console.log('Carrito actualizado después de agregar producto:', carrito);
       this.cartItemsSubject.next(carrito.productos);
       return carrito;
     } catch (error) {
@@ -88,14 +80,12 @@ export class CarritoService {
   async eliminarProducto(idUsuario: string, idProducto: string): Promise<Carrito> {
     try {
       const url = `${this.apiUrl}/usuario/${idUsuario}/producto/${idProducto}`;
-      console.log('Llamando a URL eliminarProducto:', url);
 
       const res = await fetch(url, {
         method: 'DELETE',
         credentials: 'include'
       });
 
-      console.log('Respuesta eliminarProducto status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -104,7 +94,6 @@ export class CarritoService {
       }
 
       const carrito: Carrito = await res.json();
-      console.log('Carrito actualizado después de eliminar producto:', carrito);
       this.cartItemsSubject.next(carrito.productos);
       return carrito;
     } catch (error) {
@@ -116,14 +105,12 @@ export class CarritoService {
   async vaciarCarrito(idUsuario: string): Promise<void> {
     try {
       const url = `${this.apiUrl}/vaciar/${idUsuario}`;
-      console.log('Llamando a URL vaciarCarrito:', url);
 
       const res = await fetch(url, {
         method: 'DELETE',
         credentials: 'include'
       });
 
-      console.log('Respuesta vaciarCarrito status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -132,7 +119,6 @@ export class CarritoService {
       }
 
       this.cartItemsSubject.next([]);
-      console.log('Carrito vaciado correctamente');
     } catch (error) {
       console.error('Error en vaciarCarrito:', error);
       throw error;
@@ -142,14 +128,12 @@ export class CarritoService {
   async actualizarCantidad(idUsuario: string, idProducto: string, cantidad: number): Promise<Carrito> {
     try {
       const url = `${this.apiUrl}/actualizar/${idUsuario}/${idProducto}?cantidad=${cantidad}`;
-      console.log('Llamando a URL actualizarCantidad:', url);
 
       const res = await fetch(url, {
         method: 'PUT',
         credentials: 'include'
       });
 
-      console.log('Respuesta actualizarCantidad status:', res.status);
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -158,7 +142,6 @@ export class CarritoService {
       }
 
       const carrito: Carrito = await res.json();
-      console.log('Carrito actualizado después de cambiar cantidad:', carrito);
       this.cartItemsSubject.next(carrito.productos);
       return carrito;
     } catch (error) {
