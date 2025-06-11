@@ -50,8 +50,6 @@ export class RegistComponent {
       })
       .catch(err => {
         this.successMessage = '';
-
-        // Si es un objeto con errores de validación
         if (typeof err === 'object' && err !== null && !(err instanceof Error)) {
           this.fieldErrors = err;
           this.errorMessage = 'Hay errores en el formulario.';

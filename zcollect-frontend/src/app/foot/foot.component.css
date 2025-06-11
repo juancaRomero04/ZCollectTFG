@@ -4,6 +4,5 @@ footer {
   padding: 1rem 0;
   font-family: 'Bagel Fat One', cursive;
   color: #FF3131;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* sombra sutil para separación */
-  margin-top: 2rem;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
 }

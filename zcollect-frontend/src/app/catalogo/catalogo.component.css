@@ -272,6 +272,7 @@ select:focus {
   cursor: pointer;
   box-shadow: 0 0.25rem 0.75rem rgba(76, 175, 80, 0.3);
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 1%;
 }
 
 .btn-anadir:hover {
